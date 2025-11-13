@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ContentBlock {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  payload   Json     @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model IpBlocklist {
+  id        Int      @id @default(autoincrement())
+  ipAddress String   @unique
+  attempts  Int      @default(0)
+  blockedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ip_blocklist")
+}

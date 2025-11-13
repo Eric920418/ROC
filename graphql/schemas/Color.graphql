@@ -1,0 +1,16 @@
+type Color {
+  id: ID!
+  section1: JSON
+}
+
+extend type Query {
+  color: [Color!]!
+}
+
+input UpdateColorInput {
+  section1: JSON
+}
+
+extend type Mutation {
+  updateColor(input: UpdateColorInput!): Color
+}

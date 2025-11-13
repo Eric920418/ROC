@@ -1,0 +1,16 @@
+type Logo {
+  id: ID!
+  section1: JSON
+}
+
+extend type Query {
+  logo: [Logo!]!
+}
+
+input UpdateLogoInput {
+  section1: JSON
+}
+
+extend type Mutation {
+  updateLogo(input: UpdateLogoInput!): Logo
+}
