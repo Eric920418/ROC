@@ -34,7 +34,7 @@ export function MoveToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-8 bg-brand-primary text-white p-3 rounded-full shadow-lg hover:opacity-90 transition-opacity z-50"
+      className="fixed bottom-8 right-8 bg-brand-primary text-white p-1 rounded-full shadow-lg hover:opacity-90 transition-opacity z-50"
       aria-label="回到頂部"
     >
       <ArrowUp className="w-6 h-6" />

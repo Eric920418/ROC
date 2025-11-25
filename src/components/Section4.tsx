@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function Section4() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,104 +10,108 @@ export function Section4() {
 
   const testimonials = [
     {
-      name: "陳以森",
-      nameEn: "Chen Yi-Sen",
+      title: "我的咖啡廳，風格由我來定義！",
       description:
-        "1984 年生於高雄，畢業於東海大學建築系。\n大學時期深受日本建築師安藤忠雄與北歐設計理念影響，\n相信建築應該「簡潔，但充滿情感。」",
-      image: "/testimonial-1.jpg",
+        "咖啡不止要好喝，更要脫穎而出2025年我們與Bean In Motion合作咖啡廳加速器計劃BIM今年11月剛從宏都拉進口4噸評分90分以上的藝妓咖啡豆手工挑選最優質的咖啡豆，到小批量慢火烘焙提倡咖啡不只是「一克多少錢」的交易，而是一場文化交流剛進台灣市場馬上銷售一空我們能拿出54 種咖啡風味的香氣樣本，逐一介紹讓你挑選一同體驗風味差異。更完整的為創業家設計咖啡廳創業課程為您打造一間能獲利、承載生活價值的咖啡廳A 入門組合適合小型外帶咖啡店（5-10坪）給剛嘗試投入咖啡產業內容包含：品牌命名與標誌設計、基礎室內設計、咖啡豆供應、咖啡機設備",
+      image: "/Mask group4.png",
     },
     {
-      name: "王美玲",
-      nameEn: "Wang Mei-Ling",
+      title: "空間設計超越期待，每個細節都讓人驚艷",
       description:
-        "室內設計師，專注於當代極簡風格。\n在這裡找到了設計靈感與生活平衡，\n每個空間都充滿了光與自然的對話。",
-      image: "/testimonial-2.jpg",
+        "從第一次諮詢到最後完工，整個過程都非常順利。設計師不僅理解我們的需求，還提出了許多創新的想法。完成後的空間完全符合我們的生活方式。",
+      image: "/Mask group.png",
     },
     {
-      name: "李俊賢",
-      nameEn: "Li Jun-Xian",
+      title: "專業、用心、值得信賴的設計團隊",
       description:
-        "科技創業家，熱愛簡約生活。\n這個空間讓我能專注思考，\n在寧靜中找到創新的能量。",
-      image: "/testimonial-3.jpg",
+        "選擇他們是我做過最正確的決定。從材質挑選到施工細節，每個環節都處理得非常到位。完工後的品質遠超預期，真心推薦給所有追求品質的朋友。",
+      image: "/Mask group2.png",
     },
   ];
 
-  const handlePrev = () => {
-    if (isTransitioning) return;
+  const handleDotClick = (index: number) => {
+    if (isTransitioning || index === currentIndex) return;
     setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-    setTimeout(() => setIsTransitioning(false), 500);
-  };
-
-  const handleNext = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    setCurrentIndex(index);
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="w-full bg-white px-8 py-12 md:px-16 lg:px-24">
-      <div className="mx-auto max-w-[1680px]">
-        {/* 標題 */}
-        <h2 className="mb-6 text-center text-3xl font-normal text-neutral-900 md:text-4xl lg:text-5xl">
-          See Other people Who Have
-          <br />
-          Lived In Our Residence
-        </h2>
-
-        {/* 內容區域 */}
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
-          {/* 左側：文字內容 */}
-          <div className="space-y-6">
-            {/* 姓名 */}
-            <div className="space-y-2">
-              <h3 className="text-2xl font-medium text-brand-primary md:text-3xl">
-                {currentTestimonial.name}
-                <span className="ml-3 text-neutral-900">
-                  ({currentTestimonial.nameEn})
-                </span>
-              </h3>
-            </div>
-
-            {/* 描述 */}
-            <p className="whitespace-pre-line text-base leading-relaxed text-neutral-300 md:text-lg">
-              {currentTestimonial.description}
-            </p>
-
-            {/* 導航按鈕 */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={handlePrev}
-                disabled={isTransitioning}
-                className="rounded-full border-2 border-neutral-300 p-3 text-neutral-300 transition-all hover:border-brand-primary hover:text-brand-primary disabled:opacity-30"
-                aria-label="上一位"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={handleNext}
-                disabled={isTransitioning}
-                className="rounded-full border-2 border-neutral-300 p-3 text-neutral-300 transition-all hover:border-brand-primary hover:text-brand-primary disabled:opacity-30"
-                aria-label="下一位"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
+    <section className="relative flex min-h-screen w-full items-center justify-center bg-white px-4 py-8 sm:px-6 md:px-8">
+      <div className="w-full max-w-7xl">
+        <div className="relative mx-auto flex min-h-[720px] w-full flex-col overflow-hidden rounded-xl bg-white shadow-xl lg:flex-row">
+          {/* 左側：背景圖片 */}
+          <div className="relative h-[400px] w-full lg:h-auto lg:w-3/5">
+            <div className="absolute inset-0">
+              <Image
+                src={currentTestimonial.image}
+                alt="客戶回饋背景"
+                fill
+                className="object-cover transition-opacity duration-700"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                priority
+              />
+              {/* 輕微遮罩 */}
+              <div className="absolute inset-0 bg-black/10"></div>
             </div>
           </div>
 
-          {/* 右側：照片 */}
-          <div className="relative">
-            <div className="relative aspect-[1/1] w-full overflow-hidden rounded-3xl bg-neutral-100 shadow-lg">
-              <Image
-                src={currentTestimonial.image}
-                alt={currentTestimonial.name}
-                fill
-                className="object-cover transition-opacity duration-500"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+          {/* 右側：見證卡片 */}
+          <div className="relative flex w-full flex-col justify-center p-8 sm:p-12 md:p-16 lg:w-2/5">
+            <div className="flex flex-col gap-6">
+              {/* 標籤 */}
+              <p className="text-sm font-semibold uppercase tracking-widest text-neutral-300">
+                CLIENT TESTIMONIALS
+              </p>
+
+              {/* 標題 */}
+              <h2 className="text-xl font-bold leading-tight text-neutral-900 md:text-2xl">
+                {currentTestimonial.title}
+              </h2>
+
+              {/* 描述 */}
+              <p className="text-sm leading-relaxed text-neutral-300 text-justify text-balance text-wrap">
+                {currentTestimonial.description.length > 150
+                  ? currentTestimonial.description.slice(0, 150) + "..."
+                  : currentTestimonial.description}
+              </p>
+
+              {/* CTA 連結 */}
+              <div className="pt-6">
+                <a
+                  href="#"
+                  className="group inline-flex items-center gap-2 text-neutral-900 transition-colors hover:text-brand-primary"
+                >
+                  <span className="text-sm font-medium">查看更多客戶回饋</span>
+
+                  {/* 動態底線 */}
+                  <div className="relative h-px w-10 overflow-hidden bg-neutral-300/50">
+                    <div className="absolute inset-y-0 left-0 h-full w-0 bg-brand-primary transition-all duration-300 group-hover:w-full"></div>
+                  </div>
+
+                  {/* 箭頭圖標 */}
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+              </div>
+            </div>
+
+            {/* 導航點 */}
+            <div className="absolute bottom-8 right-8 flex items-center gap-3">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleDotClick(index)}
+                  disabled={isTransitioning}
+                  className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? "bg-brand-primary"
+                      : "bg-neutral-300/50 hover:bg-neutral-300"
+                  }`}
+                  aria-label={`切換到第 ${index + 1} 則回饋`}
+                />
+              ))}
             </div>
           </div>
         </div>

@@ -14,6 +14,10 @@ const nextConfig = {
         port: "3000",
         pathname: "/api/images/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   },
   // 添加 CORS 設定

@@ -2,86 +2,96 @@
 
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Mail, Phone, Linkedin } from "lucide-react";
-
+import Image from "next/image";
 export function Section2() {
   // 團隊成員資料
   const teamMembers = [
     {
       id: 1,
-      name: "陳以森",
-      role: "創辦人 / 主設計師",
+      name: "李珈儀 Vivian",
+      role: "合夥人 / 行銷總監",
       yearsExperience: "18+",
-      avatar: "/team-1.jpg",
-      description: "畢業於東海大學建築系，深受安藤忠雄與北歐設計理念影響",
+      avatar: "/IMG_9001.jpg",
+      description:
+        "執行專案：HBO Max、MEDIX ProClot、INSPO、AZUCAR、瀚寓酒店、娘家益生菌等",
       experience: [
-        "2007-2015 台北知名建築事務所專案設計師",
-        "2015 創立森際設計 Morin Studio",
-        "2020 獲得德國紅點設計獎",
-        "專精住宅與文化空間設計"
+        "塑造全球品牌形象，讓創意與客戶需求緊密結合",
+        "透過市場洞察與批判思考，驅動品牌系統化成長",
+        "跨領域合作",
+        "管理數位內容策略與績效追蹤，優化行銷成效",
       ],
       contact: {
         email: "chen@archspace.tw",
         phone: "+886 2 2345 6789",
-        linkedin: "chen-yisen"
-      }
+        linkedin: "chen-yisen",
+      },
     },
     {
       id: 2,
-      name: "林雅琪",
-      role: "資深設計師",
-      yearsExperience: "12+",
-      avatar: "/team-2.jpg",
-      description: "成功大學建築研究所，擅長將自然元素融入當代空間",
+      name: "李珈儀 Vivian",
+      role: "合夥人 / 行銷總監",
+      yearsExperience: "18+",
+      avatar: "/IMG_9001.jpg",
+      description:
+        "塑造全球品牌形象，讓創意與客戶需求緊密結合透過市場洞察與批判思考，驅動品牌系統化成長跨領域合作管理數位內容策略與績效追蹤，優化行銷成效",
       experience: [
-        "2012-2018 日本隈研吾事務所",
-        "2018 加入森際設計團隊",
-        "專精商業空間與景觀設計",
-        "2022 獲得台灣室內設計大獎"
+        "HBO Max",
+        "MEDIX ProClot",
+        "INSPO",
+        "AZUCAR",
+        "瀚寓酒店",
+        "娘家益生菌",
       ],
       contact: {
-        email: "lin@archspace.tw",
-        phone: "+886 2 2345 6790",
-        linkedin: "lin-yaqi"
-      }
+        email: "chen@archspace.tw",
+        phone: "+886 2 2345 6789",
+        linkedin: "chen-yisen",
+      },
     },
     {
       id: 3,
-      name: "王明哲",
-      role: "建築師",
-      yearsExperience: "10+",
-      avatar: "/team-3.jpg",
-      description: "交通大學建築所碩士，專注永續建築與智慧住宅設計",
+      name: "李珈儀 Vivian",
+      role: "合夥人 / 行銷總監",
+      yearsExperience: "18+",
+      avatar: "/IMG_9001.jpg",
+      description:
+        "塑造全球品牌形象，讓創意與客戶需求緊密結合透過市場洞察與批判思考，驅動品牌系統化成長跨領域合作管理數位內容策略與績效追蹤，優化行銷成效",
       experience: [
-        "2014-2020 荷蘭 MVRDV 建築事務所",
-        "2020 加入森際設計團隊",
-        "LEED AP 認證建築師",
-        "專精綠建築與永續設計"
+        "HBO Max",
+        "MEDIX ProClot",
+        "INSPO",
+        "AZUCAR",
+        "瀚寓酒店",
+        "娘家益生菌",
       ],
       contact: {
-        email: "wang@archspace.tw",
-        phone: "+886 2 2345 6791",
-        linkedin: "wang-mingzhe"
-      }
+        email: "chen@archspace.tw",
+        phone: "+886 2 2345 6789",
+        linkedin: "chen-yisen",
+      },
     },
     {
       id: 4,
-      name: "張詩涵",
-      role: "空間設計師",
-      yearsExperience: "8+",
-      avatar: "/team-4.jpg",
-      description: "倫敦藝術大學室內設計碩士，擅長融合東西方美學",
+      name: "李珈儀 Vivian",
+      role: "合夥人 / 行銷總監",
+      yearsExperience: "18+",
+      avatar: "/IMG_9001.jpg",
+      description:
+        "塑造全球品牌形象，讓創意與客戶需求緊密結合透過市場洞察與批判思考，驅動品牌系統化成長跨領域合作管理數位內容策略與績效追蹤，優化行銷成效",
       experience: [
-        "2016-2021 英國 Foster + Partners",
-        "2021 加入森際設計團隊",
-        "專精高端住宅室內設計",
-        "2023 獲得亞洲設計獎金獎"
+        "HBO Max",
+        "MEDIX ProClot",
+        "INSPO",
+        "AZUCAR",
+        "瀚寓酒店",
+        "娘家益生菌",
       ],
       contact: {
-        email: "zhang@archspace.tw",
-        phone: "+886 2 2345 6792",
-        linkedin: "zhang-shihan"
-      }
-    }
+        email: "chen@archspace.tw",
+        phone: "+886 2 2345 6789",
+        linkedin: "chen-yisen",
+      },
+    },
   ];
 
   // 創建多組重複陣列實現真正的無限循環（重複5次）
@@ -261,14 +271,14 @@ export function Section2() {
   };
 
   return (
-    <section className="w-full bg-white px-[96px] py-16 overflow-hidden">
+    <section className="w-full bg-white px-[96px] pt-8 pb-16 overflow-hidden">
       <div className="mx-auto max-w-[1680px]">
         {/* 標題區域 */}
         <div className="text-center mb-6">
-          <h2 className="mb-4 text-5xl font-light text-brand-primary md:text-6xl lg:text-7xl">
-            Team Members
+          <h2 className="mb-4 text-3xl  text-brand-primary md:text-5xl font-bold">
+            團隊成員
           </h2>
-          <p className="text-lg text-neutral-300">團隊成員</p>
+          <p className="text-lg text-neutral-300">Team Members</p>
         </div>
 
         {/* 卡片容器 - 3D 堆疊效果 */}
@@ -342,7 +352,7 @@ export function Section2() {
                     <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full bg-brand-primary/5 blur-3xl" />
 
                     {/* 左側：頭像區域 */}
-                    <div className="relative flex flex-shrink-0 flex-col items-center justify-center pt-4">
+                    <div className="relative flex flex-shrink-0 flex-col items-center justify-center pt-4 gap-5">
                       <div
                         className={`
                         relative h-32 w-32 overflow-hidden rounded-full border-4
@@ -354,34 +364,30 @@ export function Section2() {
                         transition-all duration-300
                       `}
                       >
-                        <div className="h-full w-full bg-gradient-to-br from-brand-primary/20 to-brand-primary/10" />
-                        {/* 這裡可以放真實頭像 */}
-                        <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-brand-primary">
-                          {member.name[0]}
-                        </div>
+                        <Image src={member.avatar} alt={member.name} fill className="object-cover" />
                       </div>
 
-                        {/* 基本資訊 */}
+                      {/* 基本資訊 */}
                       <div className="mb-3 text-center">
-                        <h3 className="mb-1 text-2xl font-medium text-neutral-900">
+                        <h3 className="mb-4 text-2xl font-medium text-neutral-900">
                           {member.name}
                         </h3>
-                        <p className="mb-2 text-sm text-brand-primary">
+                        <p className="mb-4 text-sm text-brand-primary">
                           {member.role}
                         </p>
-                        <div className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2">
-                          <span className="text-2xl font-bold text-brand-primary">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-1">
+                          <span className="text-xl font-bold text-brand-primary">
                             {member.yearsExperience}
                           </span>
-                          <span className="text-xs text-neutral-300">年經驗</span>
+                          <span className="text-xs text-neutral-300">
+                            年經驗
+                          </span>
                         </div>
                       </div>
                     </div>
 
                     {/* 右側：文字資訊 */}
                     <div className="flex flex-col items-center justify-center">
-                    
-
                       {/* 簡介 */}
                       <p className="mb-3 text-sm leading-relaxed text-neutral-300">
                         {member.description}
@@ -389,9 +395,9 @@ export function Section2() {
 
                       {/* 經歷列表 - 只在當前卡片顯示 */}
                       {isCurrent && (
-                        <div className=" space-y-2 opacity-0 animate-fadeIn">
+                        <div className=" space-y-2 opacity-0 animate-fadeIn w-full">
                           {member.experience.map((exp, i) => (
-                            <div key={i} className="flex items-start gap-2">
+                            <div key={i} className="flex items-start justify-start gap-2">
                               <div className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-primary" />
                               <p className="text-xs leading-relaxed text-neutral-300">
                                 {exp}

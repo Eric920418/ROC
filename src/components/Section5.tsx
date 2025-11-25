@@ -43,7 +43,7 @@ export function Section5() {
   ];
 
   return (
-    <section className="w-full bg-white px-[96px] py-16">
+    <section className="w-full bg-white px-[96px] py-8">
       <div className="mx-auto max-w-[1680px]">
         {/* 標題 */}
         <h2 className="mb-12 text-5xl  text-brand-primary font-bold md:text-6xl ">

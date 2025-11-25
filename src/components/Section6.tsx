@@ -44,7 +44,7 @@ export function Section6() {
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_2fr]">
           {/* 左側：標題與描述 */}
           <div className="space-y-8">
-            <h2 className="text-6xl font-light text-neutral-900 md:text-7xl lg:text-8xl">
+            <h2 className="text-6xl font-light text-neutral-900 md:text-7xl ">
               QA
             </h2>
             <div className="space-y-4 text-sm leading-relaxed text-neutral-300 md:text-base">
@@ -72,11 +72,11 @@ export function Section6() {
                   </h3>
                   <div className="flex-shrink-0">
                     {openIndex === index ? (
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-primary text-white transition-transform duration-300">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-primary text-white transition-transform duration-300">
                         <Minus className="h-5 w-5" />
                       </div>
                     ) : (
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 text-neutral-300 transition-all duration-300 hover:border-brand-primary hover:text-brand-primary">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-neutral-300 text-neutral-300 transition-all duration-300 hover:border-brand-primary hover:text-brand-primary">
                         <Plus className="h-5 w-5" />
                       </div>
                     )}

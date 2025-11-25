@@ -6,6 +6,8 @@ import { Sidebar } from "@/components/Admin/Sidebar";
 import { HomePage } from "@/components/Edit/HomePage";
 import { Logo } from "@/components/Edit/Logo";
 import { Color } from "@/components/Edit/Color";
+import { ForumCategories } from "@/components/Edit/ForumCategories";
+import { ForumPosts } from "@/components/Edit/ForumPosts";
 import { useEffect } from "react";
 
 export default function AdminPage() {
@@ -18,6 +20,8 @@ export default function AdminPage() {
     { slug: "home-page", component: <HomePage /> },
     { slug: "logo", component: <Logo /> },
     { slug: "color", component: <Color /> },
+    { slug: "forum-categories", component: <ForumCategories /> },
+    { slug: "forum-posts", component: <ForumPosts /> },
   ];
 
   useEffect(() => {

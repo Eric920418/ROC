@@ -25,3 +25,64 @@ model IpBlocklist {
 
   @@map("ip_blocklist")
 }
+
+// 论坛分类/板块
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  icon        String?
+  color       String   @default("#1d2088")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  posts Post[]
+
+  @@map("categories")
+}
+
+// 论坛帖子
+model Post {
+  id         Int       @id @default(autoincrement())
+  title      String
+  slug       String    @unique
+  content    String    @db.Text
+  excerpt    String?
+  author     String
+  authorEmail String?
+  coverImage String?
+  views      Int       @default(0)
+  isPinned   Boolean   @default(false)
+  isLocked   Boolean   @default(false)
+  categoryId Int
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  comments Comment[]
+
+  @@map("posts")
+  @@index([categoryId])
+  @@index([slug])
+}
+
+// 论坛评论/回复
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String   @db.Text
+  author    String
+  authorEmail String?
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  parentId  Int?
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentReplies")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("comments")
+  @@index([postId])
+  @@index([parentId])
+}

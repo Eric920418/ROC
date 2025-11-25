@@ -24,7 +24,8 @@
       "@/interface/*": ["src/interface/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/utils/*": ["src/utils/*"],
-      "@/errors/*": ["src/errors/*"]
+      "@/errors/*": ["src/errors/*"],
+      "@/lib/*": ["lib/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

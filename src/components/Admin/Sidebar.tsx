@@ -47,6 +47,23 @@ export const Sidebar = () => {
             >
               顏色配置
             </Link>
+            <div className="border-t border-gray-700 my-4"></div>
+            <Link
+              href="/admin/forum-categories"
+              className={`block px-4 py-2 hover:bg-gray-700 ${
+                pathname === "/admin/forum-categories" ? "bg-gray-700" : ""
+              }`}
+            >
+              论坛分类
+            </Link>
+            <Link
+              href="/admin/forum-posts"
+              className={`block px-4 py-2 hover:bg-gray-700 ${
+                pathname === "/admin/forum-posts" ? "bg-gray-700" : ""
+              }`}
+            >
+              论坛帖子
+            </Link>
           </nav>
         )}
       </div>

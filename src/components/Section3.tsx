@@ -1,354 +1,169 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 export function Section3() {
-  const [currentIndex, setCurrentIndex] = useState(1); // 從 1 開始，顯示中間
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isInCenter, setIsInCenter] = useState(false); // 是否在視窗中央
-  const sectionRef = useRef<HTMLElement>(null);
-  const marqueeRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const projects = [
     {
       id: "01",
       title: "設計客廳",
+      subtitle: "當代生活的核心空間",
       description:
-        "當代客廳的骨架。\n制，\n設計師的重點。\n是一種日常的構築藝術。",
-      image: "/section3-1.jpg",
+        "當代客廳的骨架。設計師的重點。是一種日常的構築藝術。每一個角落都是精心規劃，每一道光線都經過計算。",
+      image: "/Mask group.png",
     },
     {
       id: "02",
       title: "當代設計書房",
+      subtitle: "思考與創作的聖地",
       description:
-        "極簡的線條，柔和的光，重拾不必多，只要剛好。\n在留白中思考，在寧靜裡前進。\n一張桌，一把椅，一盞光，足以築起整個世界的地基。",
-      image: "/section3-2.jpg",
+        "極簡的線條，柔和的光，重拾不必多，只要剛好。在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光，足以築起整個世界的地基。",
+      image: "/Mask group2.png",
     },
     {
       id: "03",
       title: "當代廚房",
+      subtitle: "料理與生活的交會",
       description:
-        "極簡的線條，柔和的光，\n在留白中思考，在寧靜裡前進。\n一張桌，一把椅，一盞光",
-      image: "/section3-3.jpg",
+        "極簡的線條，柔和的光，在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光。功能與美學的完美平衡。",
+      image: "/Mask group4.png",
     },
     {
       id: "04",
       title: "當代臥室",
+      subtitle: "寧靜休憩的避風港",
       description:
-        "極簡的線條，柔和的光，\n在留白中思考，在寧靜裡前進。\n一張桌，一把椅，一盞光",
-      image: "/section3-4.jpg",
+        "極簡的線條，柔和的光，在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光。回歸最純粹的休息本質。",
+      image: "/Mask group.png",
     },
     {
       id: "05",
       title: "當代浴室",
+      subtitle: "私密的療癒空間",
       description:
-        "極簡的線條，柔和的光，\n在留白中思考，在寧靜裡前進。\n一張桌，一把椅，一盞光",
-      image: "/section3-5.jpg",
+        "極簡的線條，柔和的光，在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光。水與石的詩意對話。",
+      image: "/Mask group2.png",
     },
   ];
 
-  // 創建擴展陣列（前後各補一個）以實現無縫循環
-  const extendedProjects = [
-    projects[projects.length - 1], // 最後一個
-    ...projects,
-    projects[0], // 第一個
-  ];
-
-  const handlePrev = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev - 1);
-  };
-
-  const handleNext = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
-  };
-
-  const handleTransitionEnd = () => {
-    setIsTransitioning(false);
-    // 如果到達邊界，瞬間跳轉到對應位置
-    if (currentIndex === 0) {
-      setCurrentIndex(projects.length);
-    } else if (currentIndex === extendedProjects.length - 1) {
-      setCurrentIndex(1);
-    }
-  };
-
-  // 計算真實的索引（用於指示點）
-  const getRealIndex = () => {
-    if (currentIndex === 0) return projects.length - 1;
-    if (currentIndex === extendedProjects.length - 1) return 0;
-    return currentIndex - 1;
-  };
-
-  const goToSlide = (index: number) => {
-    if (!isTransitioning) {
-      setIsTransitioning(true);
-      setCurrentIndex(index + 1); // +1 因為 extendedProjects 有偏移
-    }
-  };
-
-  // 檢測區塊是否在視窗垂直居中
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // 計算區塊中心點與視窗中心點的距離
-      const sectionCenter = rect.top + rect.height / 2;
-      const windowCenter = windowHeight / 2;
-      const distance = Math.abs(sectionCenter - windowCenter);
-
-      // 如果距離小於 300px，認為是在中央（更早觸發）
-      const inCenter = distance < 300;
-
-      if (inCenter !== isInCenter) {
-        setIsInCenter(inCenter);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // 初始檢查
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isInCenter]);
+  const currentProject = projects[currentIndex];
 
   return (
-    <section ref={sectionRef} className="w-full bg-white px-[96px] py-16">
-      <div className="mx-auto max-w-[1680px]">
-        {/* 文字圖片跑馬燈 / Slogan 區域 */}
-        <div className="relative mb-12 overflow-hidden">
-          {/* 跑馬燈 */}
-          <div
-            ref={marqueeRef}
-            className={`flex transition-opacity duration-700 ${
-              isInCenter
-                ? "animate-marquee-paused opacity-0"
-                : "animate-marquee opacity-100"
-            }`}
-          >
-            {/* 第一組圖片 */}
-            <div className="flex flex-shrink-0 gap-12 px-6">
-              <Image
-                src="/connect-blue.png"
-                alt="connect"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/compose-blue.png"
-                alt="compose"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/coedge-blue.png"
-                alt="coEdge"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/cohort-blue.png"
-                alt="cohort"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/collective-blue.png"
-                alt="collective"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-            </div>
-            {/* 第二組圖片（複製以實現無縫循環） */}
-            <div className="flex flex-shrink-0 gap-12 px-6">
-              <Image
-                src="/connect-blue.png"
-                alt="connect"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/compose-blue.png"
-                alt="compose"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/coedge-blue.png"
-                alt="coEdge"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/cohort-blue.png"
-                alt="cohort"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-              <Image
-                src="/collective-blue.png"
-                alt="collective"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain md:h-16 lg:h-20"
-              />
-            </div>
-          </div>
-
-          {/* Slogan - 當區塊居中時顯示 */}
-          <div
-            className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
-              isInCenter
-                ? "opacity-100 scale-100"
-                : "pointer-events-none opacity-0 scale-95"
-            }`}
-          >
-            <h2 className="text-4xl font-light tracking-wide text-brand-primary md:text-5xl lg:text-6xl">
-              this is my motto
-            </h2>
-          </div>
+    <section className="relative h-screen w-full bg-white overflow-hidden my-16">
+      {/* 全屏背景圖片 */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 transition-all duration-700">
+          <Image
+            src={currentProject.image}
+            alt={currentProject.title}
+            fill
+            className="object-fill"
+            priority
+            sizes="100vw"
+          />
         </div>
+        {/* 深色遮罩層 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/10 to-black/5" />
+      </div>
 
-        {/* 輪播容器 */}
-        <div className="relative overflow-hidden">
-          {/* 滑動軌道 */}
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(calc(-${
-                currentIndex * 33.333
-              }% + 16.667%))`,
-              transition: isTransitioning
-                ? "transform 0.5s ease-in-out"
-                : "none",
-            }}
-            onTransitionEnd={handleTransitionEnd}
-          >
-            {extendedProjects.map((project, index) => {
-              // 判斷是否為中央卡片
-              const isCurrent = index === currentIndex;
-              const isPrev = index === currentIndex - 1;
-              const isNext = index === currentIndex + 1;
-              const isVisible = isCurrent || isPrev || isNext;
+      {/* 主要內容區 */}
+      <main className="relative z-10 flex h-screen items-center justify-center p-4 sm:p-8">
+        <div className="w-full  mx-auto  flex items-center justify-between">
+          {/* 左側：項目導航 */}
+          <div className="">
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-2xl">
+              <div className="flex flex-col gap-4">
+                <div className="mb-4 pb-4 border-b border-white/20">
+                  <h2 className="text-white text-xl font-bold tracking-tight">
+                    空間探索
+                  </h2>
+                  <p className="text-white/70 text-sm mt-1">
+                    SPACE EXPLORATION
+                  </p>
+                </div>
 
-              return (
-                <div
-                  key={`${project.id}-${index}`}
-                  className="w-1/3 flex-shrink-0 px-4"
-                >
-                  <div
-                    className={`transition-all duration-500 ${
-                      isCurrent
-                        ? "scale-100 opacity-100"
-                        : isVisible
-                        ? "scale-90 opacity-60"
-                        : "scale-85 opacity-30"
-                    }`}
-                  >
-                    {/* 圖片 */}
-                    <div
-                      className={`relative mb-6 overflow-hidden rounded-3xl bg-neutral-100 transition-all duration-500 ${
-                        isCurrent
-                          ? "aspect-[4/3] shadow-2xl"
-                          : "aspect-[4/3] shadow-md"
+                <nav className="flex flex-col gap-2">
+                  {projects.map((project, index) => (
+                    <button
+                      key={project.id}
+                      onClick={() => setCurrentIndex(index)}
+                      className={`group flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+                        index === currentIndex
+                          ? "bg-gradient-to-r from-amber-400/90 to-amber-500/90 shadow-lg scale-105"
+                          : "bg-white/5 hover:bg-white/15"
                       }`}
                     >
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 33vw"
-                      />
-                    </div>
-
-                    {/* 內容 - 只有中央卡片顯示完整內容 */}
-                    <div
-                      className={`space-y-3 transition-all duration-500 ${
-                        isCurrent ? "opacity-100" : "opacity-60"
-                      }`}
-                    >
-                      <h3
-                        className={`font-medium ${
-                          isCurrent
-                            ? "text-2xl md:text-3xl"
-                            : "text-lg md:text-xl"
-                        }`}
-                      >
-                        <span className="text-brand-primary">{project.id}</span>{" "}
-                        <span className="text-neutral-900">
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`text-xs font-bold ${
+                            index === currentIndex
+                              ? "text-black"
+                              : "text-white/50"
+                          }`}
+                        >
+                          {project.id}
+                        </span>
+                        <span
+                          className={`text-sm font-medium tracking-wide ${
+                            index === currentIndex
+                              ? "text-black"
+                              : "text-white/80"
+                          }`}
+                        >
                           {project.title}
                         </span>
-                      </h3>
-                      {isCurrent && (
-                        <p className="whitespace-pre-line text-base leading-relaxed text-neutral-300 lg:text-lg">
-                          {project.description}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                      </div>
+                      <ArrowRight
+                        className={`h-4 w-4 transition-transform duration-300 ${
+                          index === currentIndex
+                            ? "text-black translate-x-1"
+                            : "text-white/40 group-hover:translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          {/* 右側：內容區 */}
+          <div className="">
+            <div className="w-[300px] flex flex-col gap-6 bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-2xl">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="h-1 w-12 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
+                  <span className="text-white/60 text-xs font-medium tracking-widest uppercase">
+                    {currentProject.id} / 05
+                  </span>
                 </div>
-              );
-            })}
+
+                <h1 className="text-xl lg:text-2xl font-black leading-tight tracking-tight text-white">
+                  {currentProject.title}
+                </h1>
+
+                <h2 className="text-sm font-medium text-amber-400/90">
+                  {currentProject.subtitle}
+                </h2>
+
+                <p className="text-base leading-relaxed text-white/80">
+                  {currentProject.description}
+                </p>
+              </div>
+
+              <button className="group flex items-center justify-center gap-2 w-full px-2 py-1 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black text-base font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                <span>探索更多</span>
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+           
+            </div>
           </div>
         </div>
-
-        {/* 按鈕 + 指示點 */}
-        <div className="mt-8 flex items-center justify-center gap-6">
-          {/* 左按鈕 */}
-          <button
-            onClick={handlePrev}
-            disabled={isTransitioning}
-            className="rounded-full bg-white/80 p-2.5 text-brand-primary shadow-md backdrop-blur-sm transition-all hover:bg-white hover:scale-105 disabled:opacity-30"
-            aria-label="上一張"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-
-          {/* 指示點 */}
-          <div className="flex gap-2">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                disabled={isTransitioning}
-                className={`h-2 rounded-full transition-all ${
-                  index === getRealIndex()
-                    ? "w-8 bg-brand-primary"
-                    : "w-2 bg-neutral-200 hover:bg-neutral-300"
-                }`}
-                aria-label={`跳到第 ${index + 1} 張`}
-              />
-            ))}
-          </div>
-
-          {/* 右按鈕 */}
-          <button
-            onClick={handleNext}
-            disabled={isTransitioning}
-            className="rounded-full bg-white/80 p-2.5 text-brand-primary shadow-md backdrop-blur-sm transition-all hover:bg-white hover:scale-105 disabled:opacity-30"
-            aria-label="下一張"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
+      </main>
     </section>
   );
 }
