@@ -48,9 +48,12 @@ export default async function PostPage({
 }) {
   const client = getClient();
 
+  // 解碼 URL 編碼的 slug（處理中文標題）
+  const decodedSlug = decodeURIComponent(params.slug);
+
   const { data } = await client.query({
     query: GET_POST,
-    variables: { slug: params.slug },
+    variables: { slug: decodedSlug },
   });
 
   if (!data.post) {

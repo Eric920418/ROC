@@ -36,8 +36,7 @@ input CreatePostInput {
   slug: String!
   content: String!
   excerpt: String
-  author: String!
-  authorEmail: String
+  author: String
   coverImage: String
   categoryId: Int!
   isPinned: Boolean

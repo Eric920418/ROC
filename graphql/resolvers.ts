@@ -270,13 +270,23 @@ const PostResolvers = {
     },
   },
   Mutation: {
-    createPost: async (_: unknown, { input }: { input: { title: string; slug: string; content: string; excerpt?: string; author: string; authorEmail?: string; coverImage?: string; categoryId: number; isPinned?: boolean; isLocked?: boolean } }) => {
+    createPost: async (_: unknown, { input }: { input: { title: string; slug: string; content: string; excerpt?: string; author?: string; coverImage?: string; categoryId: number; isPinned?: boolean; isLocked?: boolean } }) => {
       return await prisma.post.create({
-        data: input,
+        data: {
+          ...input,
+          author: input.author || "管理員",
+        },
         include: { category: true },
       });
     },
     updatePost: async (_: unknown, { id, input }: { id: number; input: { title?: string; slug?: string; content?: string; excerpt?: string; author?: string; authorEmail?: string; coverImage?: string; categoryId?: number; isPinned?: boolean; isLocked?: boolean } }) => {
+      // 如果要設置為精選，先取消其他所有精選（確保唯一性）
+      if (input.isPinned === true) {
+        await prisma.post.updateMany({
+          where: { isPinned: true, id: { not: id } },
+          data: { isPinned: false },
+        });
+      }
       return await prisma.post.update({
         where: { id },
         data: input,

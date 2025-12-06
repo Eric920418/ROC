@@ -33,8 +33,6 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
   const [slug, setSlug] = useState("");
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
-  const [author, setAuthor] = useState("");
-  const [authorEmail, setAuthorEmail] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [categoryId, setCategoryId] = useState<number>(categories[0]?.id || 0);
 
@@ -51,7 +49,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title.trim() || !slug.trim() || !content.trim() || !author.trim()) {
+    if (!title.trim() || !slug.trim() || !content.trim()) {
       alert("請填寫所有必填欄位");
       return;
     }
@@ -64,8 +62,6 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             slug: slug.trim(),
             content,
             excerpt: excerpt.trim() || undefined,
-            author: author.trim(),
-            authorEmail: authorEmail.trim() || undefined,
             coverImage: coverImage.trim() || undefined,
             categoryId,
           },
@@ -204,35 +200,6 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
         </label>
         <div className="border border-neutral-300 dark:border-neutral-600 rounded-lg overflow-hidden">
           <CustomEditor onContentChange={setContent} placeholder="輸入文章內容..." height="400px" />
-        </div>
-      </div>
-
-      {/* Author Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-neutral-900 font-semibold mb-2">
-            作者名稱 <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            placeholder="您的名字"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-neutral-900 font-semibold mb-2">
-            作者信箱（選填）
-          </label>
-          <input
-            type="email"
-            value={authorEmail}
-            onChange={(e) => setAuthorEmail(e.target.value)}
-            placeholder="your@email.com"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-          />
         </div>
       </div>
 

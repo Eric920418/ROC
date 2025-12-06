@@ -23,6 +23,7 @@ const GET_FORUM_DATA = gql`
         views
         commentCount
         createdAt
+        isPinned
         category {
           id
           name
@@ -47,6 +48,7 @@ interface Post {
   views: number;
   commentCount: number;
   createdAt: string;
+  isPinned: boolean;
   category: { id: number; name: string; color: string };
 }
 
@@ -81,8 +83,10 @@ export default async function ForumPage({
     ? categories.find((c: { slug: string }) => c.slug === categorySlug)
     : null;
 
-  const featuredPost: Post | null = posts.posts.length > 0 ? posts.posts[0] : null;
-  const remainingPosts: Post[] = posts.posts.slice(1);
+  // 精選文章：找到 isPinned 為 true 的文章
+  const featuredPost: Post | null = posts.posts.find((p: Post) => p.isPinned) || null;
+  // 其他文章：排除精選文章
+  const remainingPosts: Post[] = posts.posts.filter((p: Post) => !p.isPinned);
 
   const formatDate = (dateString: string) => {
     if (!dateString) return null;
@@ -254,15 +258,6 @@ export default async function ForumPage({
                       </span>
                     </div>
 
-                    {/* Hover Actions */}
-                    <div className="absolute bottom-2.5 right-2.5 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-                      <span className="w-7 h-7 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-neutral-700 hover:bg-white transition-colors shadow">
-                        <span className="material-icons-outlined text-sm">bookmark</span>
-                      </span>
-                      <span className="w-7 h-7 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-neutral-700 hover:bg-white transition-colors shadow">
-                        <span className="material-icons-outlined text-sm">share</span>
-                      </span>
-                    </div>
                   </div>
                 </Link>
 
