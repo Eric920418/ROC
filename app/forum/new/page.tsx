@@ -24,7 +24,7 @@ export default async function NewPostPage() {
     <div className="min-h-screen bg-white dark:bg-neutral-900">
       <div className="container mx-auto px-6 md:px-12 py-8 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 text-neutral-900 dark:text-white">
-          发布新帖
+          發佈新文章
         </h1>
 
         <NewPostForm categories={data.categories} />

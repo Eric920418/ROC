@@ -11,7 +11,8 @@ const ALLOWED_IP_RANGES = [
   { network: "120.127.1.0", mask: 26 }, // 120.127.1.0/26
   { ip: "140.138.82.103" }, // 單一 IP
   { network: "140.138.0.0", mask: 16 }, // 140.138.0.0/16 允許所有 140.138.x.x
-  { ip: "120.127.47.50" },  
+  { ip: "120.127.47.50" },
+  { ip: "49.218.137.113" }, // 管理員 IP
   // 本地開發環境常見的 IP 地址
   { ip: "127.0.0.1" },      // IPv4 localhost
   { ip: "::1" },            // IPv6 localhost
@@ -186,7 +187,12 @@ async function verifyToken(request: any) {
   return false;
 }
 
-// 權限包裝器 - 結合 IP 白名單和 Token 驗證
+// 不需要驗證的 Mutations（公開 API）
+const PUBLIC_MUTATIONS = [
+  'submitContactMessage', // 前台聯絡表單提交
+];
+
+// 權限包裝器 - 僅驗證 Token
 const withAuth = (resolvers: any) => {
   const wrappedResolvers = { ...resolvers };
 
@@ -194,23 +200,22 @@ const withAuth = (resolvers: any) => {
   if (resolvers.Mutation) {
     wrappedResolvers.Mutation = Object.keys(resolvers.Mutation).reduce(
       (acc: any, key: string) => {
-        // 為每個 Mutation 添加雙重驗證檢查（IP 白名單 + Token）
+        // 為每個 Mutation 添加 Token 驗證檢查
         acc[key] = async (parent: any, args: any, context: any, info: any) => {
-          // 首先檢查 IP 白名單
-          if (!context.isIPAllowed) {
-            throw new Error(
-              `❌ 拒絕存取：您的 IP 地址 (${context.clientIP}) 沒有執行修改操作的權限。只有白名單中的 IP 才能進行寫入操作。`
-            );
+          // 檢查是否為公開 Mutation（不需要驗證）
+          if (PUBLIC_MUTATIONS.includes(key)) {
+            console.log(`🔓 公開 Mutation，跳過驗證: ${key}`);
+            return resolvers.Mutation[key](parent, args, context, info);
           }
-          
-          // 然後檢查 Token 驗證
+
+          // 檢查 Token 驗證
           if (!context.isAuthenticated) {
             throw new Error(
               "❌ 驗證失敗：需要有效的 Authorization Bearer Token 才能執行修改操作"
             );
           }
-          
-          console.log(`✅ IP ${context.clientIP} 通過白名單和 Token 驗證，執行 Mutation: ${key}`);
+
+          console.log(`✅ Token 驗證通過，執行 Mutation: ${key}`);
           return resolvers.Mutation[key](parent, args, context, info);
         };
         return acc;

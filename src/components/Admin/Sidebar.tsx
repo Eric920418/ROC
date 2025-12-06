@@ -23,22 +23,23 @@ export const Sidebar = () => {
   const pageLinks = [
     { href: "/admin/about", label: "關於我們" },
     { href: "/admin/contact", label: "聯絡我們" },
+    { href: "/admin/contact-messages", label: "客戶訊息" },
   ];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full">
       <div
         className={`bg-gray-800 text-white ${
           isOpen ? "w-64" : "w-16"
-        } flex-1 transition-all min-h-screen`}
+        } flex-1 transition-all h-full flex flex-col`}
       >
-        <div className="flex items-center justify-end p-4">
+        <div className="flex items-center justify-end p-4 flex-shrink-0">
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
         {isOpen && (
-          <nav className="mt-4 space-y-1">
+          <nav className="mt-4 space-y-1 overflow-y-auto flex-1">
             {/* 首頁區塊管理 */}
             <div>
               <button
@@ -110,7 +111,7 @@ export const Sidebar = () => {
                 pathname === "/admin/forum-posts" ? "bg-gray-700" : ""
               }`}
             >
-              論壇帖子
+              論壇文章
             </Link>
           </nav>
         )}

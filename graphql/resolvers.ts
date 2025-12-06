@@ -359,6 +359,48 @@ const createSingleQueryResolver = (key: BlockKey) => async () => {
   return toResponse(key, block);
 };
 
+// ========== ContactMessage Resolvers ==========
+const ContactMessageResolvers = {
+  Query: {
+    contactMessages: async () => {
+      return await prisma.contactMessage.findMany({
+        orderBy: { createdAt: 'desc' },
+      });
+    },
+    contactMessage: async (_: unknown, { id }: { id: string }) => {
+      return await prisma.contactMessage.findUnique({
+        where: { id: parseInt(id, 10) },
+      });
+    },
+  },
+  Mutation: {
+    submitContactMessage: async (
+      _: unknown,
+      { input }: { input: { name: string; email: string; message: string } }
+    ) => {
+      return await prisma.contactMessage.create({
+        data: {
+          name: input.name,
+          email: input.email,
+          message: input.message,
+        },
+      });
+    },
+    markContactMessageRead: async (_: unknown, { id }: { id: string }) => {
+      return await prisma.contactMessage.update({
+        where: { id: parseInt(id, 10) },
+        data: { isRead: true },
+      });
+    },
+    deleteContactMessage: async (_: unknown, { id }: { id: string }) => {
+      await prisma.contactMessage.delete({
+        where: { id: parseInt(id, 10) },
+      });
+      return true;
+    },
+  },
+};
+
 const Query = {
   // 首頁各區塊
   section1: createSingleQueryResolver("section1"),
@@ -378,6 +420,8 @@ const Query = {
   ...CategoryResolvers.Query,
   ...PostResolvers.Query,
   ...CommentResolvers.Query,
+  // 聯絡訊息
+  ...ContactMessageResolvers.Query,
 };
 
 const Mutation = {
@@ -399,6 +443,8 @@ const Mutation = {
   ...CategoryResolvers.Mutation,
   ...PostResolvers.Mutation,
   ...CommentResolvers.Mutation,
+  // 聯絡訊息
+  ...ContactMessageResolvers.Mutation,
 };
 
 const resolvers = {

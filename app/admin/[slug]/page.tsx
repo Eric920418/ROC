@@ -14,6 +14,7 @@ import { Section6Edit } from "@/components/Edit/Section6Edit";
 import { Section7Edit } from "@/components/Edit/Section7Edit";
 import { AboutEdit } from "@/components/Edit/AboutEdit";
 import { ContactEdit } from "@/components/Edit/ContactEdit";
+import { ContactMessages } from "@/components/Edit/ContactMessages";
 import { useEffect } from "react";
 
 export default function AdminPage() {
@@ -34,6 +35,7 @@ export default function AdminPage() {
     // 其他頁面
     { slug: "about", component: <AboutEdit /> },
     { slug: "contact", component: <ContactEdit /> },
+    { slug: "contact-messages", component: <ContactMessages /> },
     // 論壇管理
     { slug: "forum-categories", component: <ForumCategories /> },
     { slug: "forum-posts", component: <ForumPosts /> },
@@ -67,7 +69,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-white">
       <Sidebar />
       <div className="flex-1 p-10 overflow-auto">{currentPage.component}</div>
     </div>

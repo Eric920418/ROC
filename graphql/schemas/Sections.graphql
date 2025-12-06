@@ -178,6 +178,23 @@ input UpdateContactInput {
   errorMessage: String
 }
 
+# ContactMessage - 客戶提交的聯絡訊息
+type ContactMessage {
+  id: ID!
+  name: String!
+  email: String!
+  message: String!
+  isRead: Boolean!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input SubmitContactMessageInput {
+  name: String!
+  email: String!
+  message: String!
+}
+
 # Queries
 extend type Query {
   section1: Section1
@@ -189,6 +206,8 @@ extend type Query {
   section6: Section6
   about: About
   contact: Contact
+  contactMessages: [ContactMessage!]!
+  contactMessage(id: ID!): ContactMessage
 }
 
 # Mutations
@@ -202,4 +221,7 @@ extend type Mutation {
   updateSection6(input: UpdateSection6Input!): Section6
   updateAbout(input: UpdateAboutInput!): About
   updateContact(input: UpdateContactInput!): Contact
+  submitContactMessage(input: SubmitContactMessageInput!): ContactMessage
+  markContactMessageRead(id: ID!): ContactMessage
+  deleteContactMessage(id: ID!): Boolean
 }

@@ -73,7 +73,7 @@ export function ForumCategories() {
       setIsCreating(false);
       resetForm();
     },
-    onError: (error) => alert("创建失败：" + error.message),
+    onError: (error) => alert("建立失敗：" + error.message),
   });
 
   const [updateCategory] = useMutation(UPDATE_CATEGORY, {
@@ -82,12 +82,12 @@ export function ForumCategories() {
       setEditingId(null);
       resetForm();
     },
-    onError: (error) => alert("更新失败：" + error.message),
+    onError: (error) => alert("更新失敗：" + error.message),
   });
 
   const [deleteCategory] = useMutation(DELETE_CATEGORY, {
     onCompleted: () => refetch(),
-    onError: (error) => alert("删除失败：" + error.message),
+    onError: (error) => alert("刪除失敗：" + error.message),
   });
 
   const resetForm = () => {
@@ -122,7 +122,7 @@ export function ForumCategories() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm("确定要删除此分类吗？相关帖子也会被删除！")) {
+    if (confirm("確定要刪除此分類嗎？相關文章也會被刪除！")) {
       deleteCategory({ variables: { id } });
     }
   };
@@ -130,13 +130,13 @@ export function ForumCategories() {
   const categories: Category[] = data?.categories || [];
 
   if (loading) {
-    return <div className="text-center py-12">加载中...</div>;
+    return <div className="text-center py-12">載入中...</div>;
   }
 
   return (
     <div className="max-w-6xl">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">论坛分类管理</h1>
+        <h1 className="text-3xl font-bold">論壇分類管理</h1>
         <button
           onClick={() => {
             setIsCreating(true);
@@ -146,7 +146,7 @@ export function ForumCategories() {
           className="px-4 py-2 bg-brand-primary text-white rounded-lg hover:opacity-90 flex items-center gap-2"
         >
           <Plus className="w-5 h-5" />
-          新建分类
+          新增分類
         </button>
       </div>
 
@@ -154,21 +154,21 @@ export function ForumCategories() {
       {(isCreating || editingId) && (
         <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6 mb-6">
           <h2 className="text-xl font-bold mb-4">
-            {isCreating ? "新建分类" : "编辑分类"}
+            {isCreating ? "新增分類" : "編輯分類"}
           </h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block mb-2 font-semibold">分类名称 *</label>
+              <label className="block mb-2 font-semibold">分類名稱 *</label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full px-4 py-2 border rounded-lg"
-                placeholder="例如：技术讨论"
+                placeholder="例如：技術討論"
               />
             </div>
             <div>
-              <label className="block mb-2 font-semibold">URL 别名 *</label>
+              <label className="block mb-2 font-semibold">URL 別名 *</label>
               <input
                 type="text"
                 value={formData.slug}
@@ -184,11 +184,11 @@ export function ForumCategories() {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 className="w-full px-4 py-2 border rounded-lg"
                 rows={3}
-                placeholder="分类描述（可选）"
+                placeholder="分類描述（選填）"
               />
             </div>
             <div>
-              <label className="block mb-2 font-semibold">图标 Emoji</label>
+              <label className="block mb-2 font-semibold">圖示 Emoji</label>
               <input
                 type="text"
                 value={formData.icon}
@@ -198,7 +198,7 @@ export function ForumCategories() {
               />
             </div>
             <div>
-              <label className="block mb-2 font-semibold">颜色</label>
+              <label className="block mb-2 font-semibold">顏色</label>
               <input
                 type="color"
                 value={formData.color}
@@ -222,7 +222,7 @@ export function ForumCategories() {
               className="px-6 py-2 bg-brand-primary text-white rounded-lg hover:opacity-90 flex items-center gap-2"
             >
               <Save className="w-4 h-4" />
-              保存
+              儲存
             </button>
             <button
               onClick={() => {
@@ -244,11 +244,11 @@ export function ForumCategories() {
         <table className="w-full">
           <thead className="bg-neutral-100 dark:bg-neutral-700">
             <tr>
-              <th className="px-6 py-3 text-left">图标</th>
-              <th className="px-6 py-3 text-left">名称</th>
-              <th className="px-6 py-3 text-left">URL 别名</th>
+              <th className="px-6 py-3 text-left">圖示</th>
+              <th className="px-6 py-3 text-left">名稱</th>
+              <th className="px-6 py-3 text-left">URL 別名</th>
               <th className="px-6 py-3 text-left">描述</th>
-              <th className="px-6 py-3 text-left">帖子数</th>
+              <th className="px-6 py-3 text-left">文章數</th>
               <th className="px-6 py-3 text-left">排序</th>
               <th className="px-6 py-3 text-left">操作</th>
             </tr>
@@ -299,7 +299,7 @@ export function ForumCategories() {
 
         {categories.length === 0 && (
           <div className="text-center py-12 text-neutral-500">
-            暂无分类，点击上方按钮创建第一个分类
+            尚無分類，點擊上方按鈕建立第一個分類
           </div>
         )}
       </div>

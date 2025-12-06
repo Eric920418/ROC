@@ -62,13 +62,45 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle");
 
-    // 模擬提交
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    } catch {
+      const res = await fetch("/api/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: `
+            mutation SubmitContactMessage($input: SubmitContactMessageInput!) {
+              submitContactMessage(input: $input) {
+                id
+                name
+                email
+                message
+                createdAt
+              }
+            }
+          `,
+          variables: {
+            input: {
+              name: formData.name,
+              email: formData.email,
+              message: formData.message,
+            },
+          },
+        }),
+      });
+
+      const result = await res.json();
+
+      if (result.errors) {
+        console.error("GraphQL errors:", result.errors);
+        setSubmitStatus("error");
+      } else {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);

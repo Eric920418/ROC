@@ -5,10 +5,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
-// 动态导入 CKEditor（仅客户端）
+// 動態導入 CKEditor（僅客戶端）
 const CKEditor = dynamic(() => import("@/components/CKEditor"), {
   ssr: false,
-  loading: () => <p>编辑器加载中...</p>,
+  loading: () => <p>編輯器載入中...</p>,
 });
 
 const CREATE_POST = gql`
@@ -40,11 +40,11 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
 
   const [createPost, { loading, error }] = useMutation(CREATE_POST, {
     onCompleted: (data) => {
-      alert("帖子发布成功！");
+      alert("文章發佈成功！");
       router.push(`/forum/${data.createPost.slug}`);
     },
     onError: (error) => {
-      alert("发布失败：" + error.message);
+      alert("發佈失敗：" + error.message);
     },
   });
 
@@ -52,7 +52,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
     e.preventDefault();
 
     if (!title.trim() || !slug.trim() || !content.trim() || !author.trim()) {
-      alert("请填写所有必填字段");
+      alert("請填寫所有必填欄位");
       return;
     }
 
@@ -90,7 +90,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
       {/* Error Display */}
       {error && (
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-300 dark:border-red-700 text-red-800 dark:text-red-300 px-6 py-4 rounded-lg">
-          <p className="font-semibold">发布失败</p>
+          <p className="font-semibold">發佈失敗</p>
           <p className="text-sm">{error.message}</p>
         </div>
       )}
@@ -98,13 +98,13 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
       {/* Title */}
       <div>
         <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
-          标题 <span className="text-red-500">*</span>
+          標題 <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="输入帖子标题"
+          placeholder="輸入文章標題"
           className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
           required
         />
@@ -113,7 +113,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
       {/* Slug */}
       <div>
         <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
-          URL 别名 <span className="text-red-500">*</span>
+          URL 別名 <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-2">
           <input
@@ -129,18 +129,18 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             onClick={generateSlug}
             className="px-6 py-3 bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors font-semibold"
           >
-            自动生成
+            自動產生
           </button>
         </div>
         <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-          用于 URL 地址，建议使用英文小写字母和连字符
+          用於 URL 網址，建議使用英文小寫字母和連字符
         </p>
       </div>
 
       {/* Category */}
       <div>
         <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
-          分类 <span className="text-red-500">*</span>
+          分類 <span className="text-red-500">*</span>
         </label>
         <select
           value={categoryId}
@@ -159,7 +159,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
       {/* Cover Image */}
       <div>
         <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
-          封面图片 URL
+          封面圖片 URL
         </label>
         <input
           type="url"
@@ -172,11 +172,11 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           <div className="mt-3">
             <img
               src={coverImage}
-              alt="封面预览"
+              alt="封面預覽"
               className="w-full max-w-md h-48 object-cover rounded-lg"
               onError={(e) => {
                 e.currentTarget.src = "";
-                e.currentTarget.alt = "图片加载失败";
+                e.currentTarget.alt = "圖片載入失敗";
               }}
             />
           </div>
@@ -191,7 +191,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
         <textarea
           value={excerpt}
           onChange={(e) => setExcerpt(e.target.value)}
-          placeholder="简短的摘要，用于列表页展示"
+          placeholder="簡短的摘要，用於列表頁展示"
           rows={3}
           className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
         />
@@ -200,7 +200,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
       {/* Content */}
       <div>
         <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
-          内容 <span className="text-red-500">*</span>
+          內容 <span className="text-red-500">*</span>
         </label>
         <div className="border border-neutral-300 dark:border-neutral-600 rounded-lg overflow-hidden">
           <CKEditor value={content} onChange={setContent} />
@@ -211,20 +211,20 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
-            作者名称 <span className="text-red-500">*</span>
+            作者名稱 <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            placeholder="你的名字"
+            placeholder="您的名字"
             className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
             required
           />
         </div>
         <div>
           <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
-            作者邮箱（可选）
+            作者信箱（選填）
           </label>
           <input
             type="email"
@@ -243,7 +243,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           disabled={loading}
           className="px-8 py-4 bg-brand-primary text-white rounded-lg hover:opacity-90 transition-opacity font-semibold disabled:opacity-50 text-lg"
         >
-          {loading ? "发布中..." : "发布帖子"}
+          {loading ? "發佈中..." : "發佈文章"}
         </button>
         <button
           type="button"
