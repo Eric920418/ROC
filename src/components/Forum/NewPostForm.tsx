@@ -105,7 +105,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="輸入文章標題"
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
           required
         />
       </div>
@@ -121,7 +121,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
             placeholder="url-slug-example"
-            className="flex-1 px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="flex-1 px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
             required
           />
           <button
@@ -145,7 +145,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
         <select
           value={categoryId}
           onChange={(e) => setCategoryId(parseInt(e.target.value))}
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-whitetext-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
           required
         >
           {categories.map((cat) => (
@@ -166,7 +166,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           value={coverImage}
           onChange={(e) => setCoverImage(e.target.value)}
           placeholder="https://example.com/image.jpg"
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
         />
         {coverImage && (
           <div className="mt-3">
@@ -193,7 +193,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           onChange={(e) => setExcerpt(e.target.value)}
           placeholder="簡短的摘要，用於列表頁展示"
           rows={3}
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
         />
       </div>
 
@@ -218,7 +218,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="您的名字"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
             required
           />
         </div>
@@ -231,7 +231,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             value={authorEmail}
             onChange={(e) => setAuthorEmail(e.target.value)}
             placeholder="your@email.com"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
           />
         </div>
       </div>

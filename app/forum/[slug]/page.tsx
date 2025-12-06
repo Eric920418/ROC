@@ -176,7 +176,7 @@ export default async function PostPage({
         <div className="mt-16 flex justify-center">
           <Link
             href="/forum"
-            className="px-8 py-3 bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors font-semibold"
+            className="px-8 py-3 bg-neutral-100  text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors font-semibold"
           >
             ← 返回论坛
           </Link>

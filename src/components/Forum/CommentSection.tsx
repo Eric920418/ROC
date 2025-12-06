@@ -126,7 +126,7 @@ export default function CommentSection({
       {/* Comment Form */}
       {!isLocked && (
         <form onSubmit={handleSubmit} className="mb-12">
-          <div className="bg-neutral-50 dark:bg-neutral-800 rounded-xl p-6">
+          <div className="bg-neutral-50 rounded-xl p-6">
             <div className="mb-4">
               <input
                 type="text"
@@ -162,7 +162,7 @@ export default function CommentSection({
       )}
 
       {isLocked && (
-        <div className="mb-12 bg-neutral-100 dark:bg-neutral-800 rounded-xl p-6 text-center text-neutral-600 dark:text-neutral-400">
+        <div className="mb-12 bg-neutral-100 rounded-xl p-6 text-center text-neutral-600 dark:text-neutral-400">
           🔒 此帖已锁定，无法发表新评论
         </div>
       )}
@@ -182,7 +182,7 @@ export default function CommentSection({
         )}
 
         {comments.map((comment) => (
-          <div key={comment.id} className="bg-neutral-50 dark:bg-neutral-800 rounded-xl p-6">
+          <div key={comment.id} className="bg-neutral-50  rounded-xl p-6">
             {/* Comment Header */}
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold">
@@ -222,7 +222,7 @@ export default function CommentSection({
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
                     rows={3}
-                    className="w-full px-4 py-3 mb-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
+                    className="w-full px-4 py-3 mb-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
                   />
                   <div className="flex gap-2 justify-end">
                     <button

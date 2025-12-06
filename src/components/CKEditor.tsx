@@ -18,7 +18,7 @@ export default function CKEditor({ value, onChange }: CKEditorProps) {
 
   if (!mounted) {
     return (
-      <div className="w-full h-64 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-500">
+      <div className="w-full h-64 bg-neutral-100  rounded-lg flex items-center justify-center text-neutral-500">
         编辑器加载中...
       </div>
     );

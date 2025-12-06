@@ -152,7 +152,7 @@ export function ForumCategories() {
 
       {/* Create/Edit Form */}
       {(isCreating || editingId) && (
-        <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6 mb-6">
+        <div className="bg-neutral-100 rounded-lg p-6 mb-6">
           <h2 className="text-xl font-bold mb-4">
             {isCreating ? "新增分類" : "編輯分類"}
           </h2>
@@ -240,9 +240,9 @@ export function ForumCategories() {
       )}
 
       {/* Categories Table */}
-      <div className="bg-white dark:bg-neutral-800 rounded-lg shadow overflow-hidden">
+      <div className="bg-white  rounded-lg shadow overflow-hidden">
         <table className="w-full">
-          <thead className="bg-neutral-100 dark:bg-neutral-700">
+          <thead className="bg-neutral-100 ">
             <tr>
               <th className="px-6 py-3 text-left">圖示</th>
               <th className="px-6 py-3 text-left">名稱</th>

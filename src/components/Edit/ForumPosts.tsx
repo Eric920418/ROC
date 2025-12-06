@@ -122,7 +122,7 @@ export function ForumPosts() {
       </div>
 
       {/* Posts Table */}
-      <div className="bg-white dark:bg-neutral-800 rounded-lg shadow overflow-hidden">
+      <div className="bg-white  rounded-lg shadow overflow-hidden">
         <table className="w-full">
           <thead className="bg-neutral-100 dark:bg-neutral-700">
             <tr>
