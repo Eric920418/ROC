@@ -59,9 +59,7 @@ export function ForumCategories() {
   const [isCreating, setIsCreating] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    slug: "",
     description: "",
-    icon: "",
     color: "#1d2088",
     order: 0,
   });
@@ -93,31 +91,41 @@ export function ForumCategories() {
   const resetForm = () => {
     setFormData({
       name: "",
-      slug: "",
       description: "",
-      icon: "",
       color: "#1d2088",
       order: 0,
     });
+  };
+
+  // 自動生成 slug（將中文轉為拼音或保留英文）
+  const generateSlug = (name: string) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\u4e00-\u9fa5\s-]/g, "")
+      .replace(/[\s_]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   };
 
   const handleEdit = (category: Category) => {
     setEditingId(category.id);
     setFormData({
       name: category.name,
-      slug: category.slug,
       description: category.description || "",
-      icon: category.icon || "",
       color: category.color,
       order: category.order,
     });
   };
 
   const handleSave = () => {
+    const dataToSave = {
+      ...formData,
+      slug: generateSlug(formData.name),
+    };
     if (isCreating) {
-      createCategory({ variables: { input: formData } });
+      createCategory({ variables: { input: dataToSave } });
     } else if (editingId) {
-      updateCategory({ variables: { id: editingId, input: formData } });
+      updateCategory({ variables: { id: editingId, input: dataToSave } });
     }
   };
 
@@ -168,14 +176,10 @@ export function ForumCategories() {
               />
             </div>
             <div>
-              <label className="block mb-2 font-semibold">URL 別名 *</label>
-              <input
-                type="text"
-                value={formData.slug}
-                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg"
-                placeholder="例如：technology"
-              />
+              <label className="block mb-2 font-semibold">URL 別名</label>
+              <div className="w-full px-4 py-2 border rounded-lg bg-neutral-50 text-neutral-500">
+                {generateSlug(formData.name) || "（自動生成）"}
+              </div>
             </div>
             <div className="col-span-2">
               <label className="block mb-2 font-semibold">描述</label>
@@ -185,16 +189,6 @@ export function ForumCategories() {
                 className="w-full px-4 py-2 border rounded-lg"
                 rows={3}
                 placeholder="分類描述（選填）"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 font-semibold">圖示 Emoji</label>
-              <input
-                type="text"
-                value={formData.icon}
-                onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg"
-                placeholder="例如：💻"
               />
             </div>
             <div>
@@ -244,7 +238,6 @@ export function ForumCategories() {
         <table className="w-full">
           <thead className="bg-neutral-100 ">
             <tr>
-              <th className="px-6 py-3 text-left">圖示</th>
               <th className="px-6 py-3 text-left">名稱</th>
               <th className="px-6 py-3 text-left">URL 別名</th>
               <th className="px-6 py-3 text-left">描述</th>
@@ -256,9 +249,6 @@ export function ForumCategories() {
           <tbody>
             {categories.map((category) => (
               <tr key={category.id} className="border-t dark:border-neutral-700">
-                <td className="px-6 py-4">
-                  <span className="text-2xl">{category.icon}</span>
-                </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
                     <span
