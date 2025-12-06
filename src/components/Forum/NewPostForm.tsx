@@ -127,7 +127,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           <button
             type="button"
             onClick={generateSlug}
-            className="px-6 py-3 bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors font-semibold"
+            className="px-6 py-3 bg-neutral-200  text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors font-semibold"
           >
             自動產生
           </button>
@@ -248,7 +248,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-8 py-4 bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors font-semibold text-lg"
+          className="px-8 py-4 bg-neutral-200  text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors font-semibold text-lg"
         >
           取消
         </button>

@@ -227,7 +227,7 @@ export default function CommentSection({
                   <div className="flex gap-2 justify-end">
                     <button
                       onClick={() => setReplyingTo(null)}
-                      className="px-4 py-2 bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors"
+                      className="px-4 py-2 bg-neutral-200  text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors"
                     >
                       取消
                     </button>
@@ -249,7 +249,7 @@ export default function CommentSection({
                 {comment.replies.map((reply) => (
                   <div key={reply.id} className="bg-white dark:bg-neutral-900 rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-white flex items-center justify-center font-bold text-sm">
+                      <div className="w-8 h-8 rounded-full bg-neutral-300  text-neutral-900 dark:text-white flex items-center justify-center font-bold text-sm">
                         {reply.author[0].toUpperCase()}
                       </div>
                       <div>

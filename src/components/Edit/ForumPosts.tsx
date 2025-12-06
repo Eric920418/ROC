@@ -124,7 +124,7 @@ export function ForumPosts() {
       {/* Posts Table */}
       <div className="bg-white  rounded-lg shadow overflow-hidden">
         <table className="w-full">
-          <thead className="bg-neutral-100 dark:bg-neutral-700">
+          <thead className="bg-neutral-100 ">
             <tr>
               <th className="px-6 py-3 text-left">標題</th>
               <th className="px-6 py-3 text-left">分類</th>
@@ -231,7 +231,7 @@ export function ForumPosts() {
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg disabled:opacity-50"
+            className="px-4 py-2 bg-neutral-200  rounded-lg disabled:opacity-50"
           >
             上一頁
           </button>
@@ -241,7 +241,7 @@ export function ForumPosts() {
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={!hasMore}
-            className="px-4 py-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg disabled:opacity-50"
+            className="px-4 py-2 bg-neutral-200  rounded-lg disabled:opacity-50"
           >
             下一頁
           </button>
