@@ -133,7 +133,7 @@ export default function CommentSection({
                 placeholder="你的名字"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 required
               />
             </div>
@@ -143,7 +143,7 @@ export default function CommentSection({
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
+                className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
                 required
               />
             </div>
@@ -216,7 +216,7 @@ export default function CommentSection({
             {/* Reply Form */}
             {replyingTo === comment.id && (
               <div className="mt-4 pl-13">
-                <div className="bg-white dark:bg-neutral-900 rounded-lg p-4">
+                <div className="bg-white rounded-lg p-4">
                   <textarea
                     placeholder="写下你的回复..."
                     value={replyContent}
@@ -247,7 +247,7 @@ export default function CommentSection({
             {comment.replies && comment.replies.length > 0 && (
               <div className="mt-4 pl-13 space-y-4">
                 {comment.replies.map((reply) => (
-                  <div key={reply.id} className="bg-white dark:bg-neutral-900 rounded-lg p-4">
+                  <div key={reply.id} className="bg-white rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-8 h-8 rounded-full bg-neutral-300  text-neutral-900 dark:text-white flex items-center justify-center font-bold text-sm">
                         {reply.author[0].toUpperCase()}
