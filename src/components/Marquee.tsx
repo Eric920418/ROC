@@ -6,15 +6,24 @@ import { useState, useEffect, useRef } from "react";
 export function Marquee() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isInCenter, setIsInCenter] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  // 检测是否为手机版
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // 後綴圖片列表（可個別調整 offsetX 來控制與 Logo 的距離，負數代表向左移動）
   const suffixImages = [
-    { src: "/coEdge-blue.png", alt: "Edge", offsetX: -120, offsetY: 2 },      // 調整這個數值
-    { src: "/connect-blue.png", alt: "nnect", offsetX: -108, offsetY: 2 },    // 調整這個數值
-    { src: "/compose-blue.png", alt: "mpose", offsetX: -100, offsetY: 0 },    // 調整這個數值
-    { src: "/cohort-blue.png", alt: "hort", offsetX: -124, offsetY: 0 },      // 調整這個數值
-    { src: "/collective-blue.png", alt: "llective", offsetX: -100, offsetY: 0 }, // 調整這個數值
+    { src: "/coEdge-blue.png", alt: "Edge", offsetX: -215, offsetY: 2 },      // 調整這個數值
+    { src: "/connect-blue.png", alt: "nnect", offsetX: -190, offsetY: 2 },    // 調整這個數值
+    { src: "/compose-blue.png", alt: "mpose", offsetX: -170, offsetY: 0 },    // 調整這個數值
+    { src: "/cohort-blue.png", alt: "hort", offsetX: -230, offsetY: 0 },      // 調整這個數值
+    { src: "/collective-blue.png", alt: "llective", offsetX: -170, offsetY: 0 }, // 調整這個數值
   ];
 
   // 檢測區塊是否在視窗垂直居中
@@ -26,9 +35,9 @@ export function Marquee() {
       const windowHeight = window.innerHeight;
 
       // 當 section 橫跨視窗中心線時顯示 slogan
-      const windowCenter = windowHeight / 2;
+      const windowCenter = windowHeight / 3;
       const sectionTop = rect.top;
-      const sectionBottom = rect.bottom;
+      const sectionBottom = rect.bottom + 60;
 
       // section 橫跨視窗中心線即可（簡化條件）
       const inCenter = sectionTop < windowCenter && sectionBottom > windowCenter;
@@ -54,12 +63,12 @@ export function Marquee() {
   }, [suffixImages.length]);
 
   return (
-    <section ref={sectionRef} className="w-full bg-white px-[96px]">
+    <section ref={sectionRef} className="w-full bg-white px-4 md:px-[96px]">
       <div className="mx-auto max-w-[1680px]">
         <div className="relative">
           {/* R.co + 後綴輪播區域 */}
           <div
-            className={`flex items-center justify-center gap-0 ms-30 transition-opacity duration-700 ${
+            className={`flex items-center justify-center gap-0 transition-opacity duration-700 ${
               isInCenter ? "opacity-0" : "opacity-100"
             }`}
           >
@@ -68,15 +77,17 @@ export function Marquee() {
               <Image
                 src="/R.coLogo.png"
                 alt="R.co"
-                width={200}
+                width={300}
                 height={80}
-                className="h-20 w-auto object-contain lg:h-[60px]"
+                className="h-[60px] w-auto object-contain md:h-[120px]"
                 priority
               />
             </div>
 
             {/* 輪播的後綴圖片 */}
-            <div className="relative flex items-center justify-start overflow-hidden" style={{ width: "300px", height: "180px" }}>
+            <div
+              className="relative flex items-center justify-start overflow-hidden w-[200px] h-[150px] md:w-[550px] md:h-[300px]"
+            >
               {suffixImages.map((image, index) => (
                 <div
                   key={image.src}
@@ -85,14 +96,17 @@ export function Marquee() {
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 -translate-y-4"
                   }`}
-                  style={{ marginLeft: `${image.offsetX}px` , marginTop: `${image.offsetY}px` }}
+                  style={{
+                    marginLeft: `${isMobile ? image.offsetX * 0.4 : image.offsetX}px`,
+                    marginTop: `${image.offsetY}px`,
+                  }}
                 >
                   <Image
                     src={image.src}
                     alt={image.alt}
-                    width={300}
-                    height={80}
-                    className="h-full w-[300px] object-contain object-left"
+                    width={800}
+                    height={500}
+                    className="h-full object-contain object-left scale-[0.5] md:scale-[1.1]"
                     priority={index === 0}
                   />
                 </div>
@@ -108,7 +122,7 @@ export function Marquee() {
                 : "pointer-events-none opacity-0 scale-95"
             }`}
           >
-            <h2 className="text-4xl font-light tracking-wide text-brand-primary md:text-5xl lg:text-6xl">
+            <h2 className="text-xl font-light tracking-wide text-brand-primary md:text-4xl lg:text-6xl">
               THIS IS MY MOTTO
             </h2>
           </div>

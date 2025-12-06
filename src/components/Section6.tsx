@@ -1,57 +1,80 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Minus } from "lucide-react";
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Section6Data {
+  title: string;
+  leftDescription: string;
+  faqs: FAQ[];
+}
+
+const defaultFaqs: FAQ[] = [
+  {
+    question: "你怎麼定義「當代設計」？",
+    answer: "對我來說，當代設計不是一種風格，而是一種態度。\n它關注當下的生活方式、材質的真實性與環境的回應。",
+  },
+  {
+    question: "你的靈感通常來自哪裡？",
+    answer: "靈感來自日常生活的觀察，旅行中的建築體驗，\n以及與業主深度對話後理解的需求。\n每個空間都有它獨特的故事。",
+  },
+];
 
 export function Section6() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [sectionData, setSectionData] = useState<Section6Data>({
+    title: "QA",
+    leftDescription: "線條簡潔、比例純粹\n當代住宅不唯噩於形\n而讓空間自己說話\n\n少一分裝飾，多一分真實",
+    faqs: defaultFaqs,
+  });
 
-  const faqs = [
-    {
-      question: "你怎麼定義「當代設計」？",
-      answer:
-        "對我來說，當代設計不是一種風格，而是一種態度。\n它關注當下的生活方式、材質的真實性與環境的回應。",
-    },
-    {
-      question: "你的靈感通常來自哪裡？",
-      answer:
-        "靈感來自日常生活的觀察，旅行中的建築體驗，\n以及與業主深度對話後理解的需求。\n每個空間都有它獨特的故事。",
-    },
-    {
-      question: "你認為好的空間設計，應該具備什麼？",
-      answer:
-        "好的空間設計應該是功能與美學的平衡，\n能夠回應使用者的需求，同時帶來情感上的共鳴。\n簡潔但不簡單，實用且充滿溫度。",
-    },
-    {
-      question: "你的工作室有什麼理念？",
-      answer:
-        "我們相信「少即是多」，但這個「少」不是匱乏，\n而是經過深思熟慮後的精煉。\n每個設計決策都應該有其存在的理由。",
-    },
-    {
-      question: "你最想透過設計傳達什麼？",
-      answer:
-        "我希望透過設計傳達一種生活態度：\n在快速變化的世界中，找到屬於自己的節奏與平靜。\n讓空間成為生活的支持，而非負擔。",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/graphql", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `query { section6 { title leftDescription faqs } }`,
+          }),
+        });
+        const { data } = await res.json();
+        if (data?.section6) {
+          setSectionData({
+            title: data.section6.title || "QA",
+            leftDescription: data.section6.leftDescription || "",
+            faqs: data.section6.faqs?.length > 0 ? data.section6.faqs : defaultFaqs,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch section6 data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const faqs = sectionData.faqs;
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="w-full bg-white px-[96px] py-16">
+    <section className="w-full bg-white px-4 py-16 md:px-[96px]">
       <div className="mx-auto max-w-[1680px]">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_2fr]">
           {/* 左側：標題與描述 */}
           <div className="space-y-8">
-            <h2 className="text-6xl font-light text-neutral-900 md:text-7xl ">
-              QA
+            <h2 className="text-4xl font-light text-neutral-900 md:text-6xl lg:text-7xl">
+              {sectionData.title}
             </h2>
-            <div className="space-y-4 text-sm leading-relaxed text-neutral-300 md:text-base">
-              <p>線條簡潔、比例純粹</p>
-              <p>當代住宅不唯噩於形</p>
-              <p>而讓空間自己說話</p>
-              <p className="pt-6">少一分裝飾，多一分真實</p>
+            <div className="space-y-4 text-sm leading-relaxed text-neutral-300 md:text-base whitespace-pre-line">
+              {sectionData.leftDescription}
             </div>
           </div>
 

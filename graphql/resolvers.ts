@@ -353,8 +353,25 @@ const CommentResolvers = {
   },
 };
 
+// 單一結果的 Query resolver（不回傳陣列）
+const createSingleQueryResolver = (key: BlockKey) => async () => {
+  const block = await ensureBlock(key);
+  return toResponse(key, block);
+};
+
 const Query = {
-  homePage: createQueryResolver("homePage"),
+  // 首頁各區塊
+  section1: createSingleQueryResolver("section1"),
+  marquee: createSingleQueryResolver("marquee"),
+  section7: createSingleQueryResolver("section7"),
+  section2: createSingleQueryResolver("section2"),
+  section3: createSingleQueryResolver("section3"),
+  section4: createSingleQueryResolver("section4"),
+  section6: createSingleQueryResolver("section6"),
+  // 其他頁面
+  about: createSingleQueryResolver("about"),
+  contact: createSingleQueryResolver("contact"),
+  // 其他設定
   logo: createQueryResolver("logo"),
   color: createQueryResolver("color"),
   // 论坛相关
@@ -364,7 +381,18 @@ const Query = {
 };
 
 const Mutation = {
-  updateHomePage: createMutationResolver("homePage"),
+  // 首頁各區塊
+  updateSection1: createMutationResolver("section1"),
+  updateMarquee: createMutationResolver("marquee"),
+  updateSection7: createMutationResolver("section7"),
+  updateSection2: createMutationResolver("section2"),
+  updateSection3: createMutationResolver("section3"),
+  updateSection4: createMutationResolver("section4"),
+  updateSection6: createMutationResolver("section6"),
+  // 其他頁面
+  updateAbout: createMutationResolver("about"),
+  updateContact: createMutationResolver("contact"),
+  // 其他設定
   updateLogo: createMutationResolver("logo"),
   updateColor: createMutationResolver("color"),
   // 论坛相关

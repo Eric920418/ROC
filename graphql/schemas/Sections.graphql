@@ -1,0 +1,205 @@
+# Section1 - 主視覺區
+type Section1 {
+  id: ID!
+  titleLeft: String
+  titleRight: String
+  tagline: String
+  leftImage: String
+  rightTopText: String
+  rightTopTagline: String
+  rightImage: String
+  bottomTitle: String
+  bottomDescription: String
+}
+
+input UpdateSection1Input {
+  titleLeft: String
+  titleRight: String
+  tagline: String
+  leftImage: String
+  rightTopText: String
+  rightTopTagline: String
+  rightImage: String
+  bottomTitle: String
+  bottomDescription: String
+}
+
+# Marquee - 品牌輪播
+type Marquee {
+  id: ID!
+  logoImage: String
+  slogan: String
+  suffixImages: JSON
+}
+
+input UpdateMarqueeInput {
+  logoImage: String
+  slogan: String
+  suffixImages: JSON
+}
+
+# Section7 - 立足台灣
+type Section7 {
+  id: ID!
+  title: String
+  description: String
+  regions: JSON
+  images: JSON
+}
+
+input UpdateSection7Input {
+  title: String
+  description: String
+  regions: JSON
+  images: JSON
+}
+
+# Section2 - 團隊成員
+type Section2 {
+  id: ID!
+  title: String
+  subtitle: String
+  members: JSON
+}
+
+input UpdateSection2Input {
+  title: String
+  subtitle: String
+  members: JSON
+}
+
+# Section3 - 空間探索
+type Section3 {
+  id: ID!
+  navTitle: String
+  navSubtitle: String
+  projects: JSON
+}
+
+input UpdateSection3Input {
+  navTitle: String
+  navSubtitle: String
+  projects: JSON
+}
+
+# Section4 - 客戶見證
+type Section4 {
+  id: ID!
+  label: String
+  ctaText: String
+  ctaLink: String
+  testimonials: JSON
+}
+
+input UpdateSection4Input {
+  label: String
+  ctaText: String
+  ctaLink: String
+  testimonials: JSON
+}
+
+# Section6 - FAQ
+type Section6 {
+  id: ID!
+  title: String
+  leftDescription: String
+  faqs: JSON
+}
+
+input UpdateSection6Input {
+  title: String
+  leftDescription: String
+  faqs: JSON
+}
+
+# About 頁面
+type About {
+  id: ID!
+  whoIsTitle: String
+  whoIsDescription: String
+  featuredImage: String
+  headOffice: String
+  foundedYear: String
+  instagramLink: String
+  facebookLink: String
+  founderImage: String
+  foundedDate: String
+  visionTitle: String
+  visionDescription1: String
+  visionDescription2: String
+  quote: String
+  quoteAuthor: String
+  galleryImages: JSON
+}
+
+input UpdateAboutInput {
+  whoIsTitle: String
+  whoIsDescription: String
+  featuredImage: String
+  headOffice: String
+  foundedYear: String
+  instagramLink: String
+  facebookLink: String
+  founderImage: String
+  foundedDate: String
+  visionTitle: String
+  visionDescription1: String
+  visionDescription2: String
+  quote: String
+  quoteAuthor: String
+  galleryImages: JSON
+}
+
+# Contact 頁面
+type Contact {
+  id: ID!
+  mainTitle: String
+  backgroundTitle: String
+  description: String
+  email: String
+  phone: String
+  studioName: String
+  studioAddress: String
+  submitButtonText: String
+  successMessage: String
+  errorMessage: String
+}
+
+input UpdateContactInput {
+  mainTitle: String
+  backgroundTitle: String
+  description: String
+  email: String
+  phone: String
+  studioName: String
+  studioAddress: String
+  submitButtonText: String
+  successMessage: String
+  errorMessage: String
+}
+
+# Queries
+extend type Query {
+  section1: Section1
+  marquee: Marquee
+  section7: Section7
+  section2: Section2
+  section3: Section3
+  section4: Section4
+  section6: Section6
+  about: About
+  contact: Contact
+}
+
+# Mutations
+extend type Mutation {
+  updateSection1(input: UpdateSection1Input!): Section1
+  updateMarquee(input: UpdateMarqueeInput!): Marquee
+  updateSection7(input: UpdateSection7Input!): Section7
+  updateSection2(input: UpdateSection2Input!): Section2
+  updateSection3(input: UpdateSection3Input!): Section3
+  updateSection4(input: UpdateSection4Input!): Section4
+  updateSection6(input: UpdateSection6Input!): Section6
+  updateAbout(input: UpdateAboutInput!): About
+  updateContact(input: UpdateContactInput!): Contact
+}

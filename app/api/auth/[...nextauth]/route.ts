@@ -20,8 +20,8 @@ const handler = NextAuth({
       async authorize(credentials) {
         // 驗證使用者憑證
         if (
-          credentials?.username === "ictesite" &&
-          credentials?.password === "icteadmin_62139"
+          credentials?.username === "admin" &&
+          credentials?.password === "admin123"
         ) {
           return {
             id: "1",

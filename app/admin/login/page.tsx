@@ -107,7 +107,7 @@ export default function LoginPage() {
       } else {
         // 登入成功，重置 IP 記錄
         await resetIpRecord();
-        router.push("/admin/meeting");
+        router.push("/admin/section1");
         router.refresh();
       }
     } finally {

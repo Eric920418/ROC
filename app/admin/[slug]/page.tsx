@@ -3,11 +3,17 @@
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Sidebar } from "@/components/Admin/Sidebar";
-import { HomePage } from "@/components/Edit/HomePage";
-import { Logo } from "@/components/Edit/Logo";
-import { Color } from "@/components/Edit/Color";
 import { ForumCategories } from "@/components/Edit/ForumCategories";
 import { ForumPosts } from "@/components/Edit/ForumPosts";
+import { Section1Edit } from "@/components/Edit/Section1Edit";
+import { MarqueeEdit } from "@/components/Edit/MarqueeEdit";
+import { Section2Edit } from "@/components/Edit/Section2Edit";
+import { Section3Edit } from "@/components/Edit/Section3Edit";
+import { Section4Edit } from "@/components/Edit/Section4Edit";
+import { Section6Edit } from "@/components/Edit/Section6Edit";
+import { Section7Edit } from "@/components/Edit/Section7Edit";
+import { AboutEdit } from "@/components/Edit/AboutEdit";
+import { ContactEdit } from "@/components/Edit/ContactEdit";
 import { useEffect } from "react";
 
 export default function AdminPage() {
@@ -17,9 +23,18 @@ export default function AdminPage() {
   const { data: session, status } = useSession();
 
   const EditPages = [
-    { slug: "home-page", component: <HomePage /> },
-    { slug: "logo", component: <Logo /> },
-    { slug: "color", component: <Color /> },
+    // 首頁區塊
+    { slug: "section1", component: <Section1Edit /> },
+    { slug: "marquee", component: <MarqueeEdit /> },
+    { slug: "section7", component: <Section7Edit /> },
+    { slug: "section2", component: <Section2Edit /> },
+    { slug: "section3", component: <Section3Edit /> },
+    { slug: "section4", component: <Section4Edit /> },
+    { slug: "section6", component: <Section6Edit /> },
+    // 其他頁面
+    { slug: "about", component: <AboutEdit /> },
+    { slug: "contact", component: <ContactEdit /> },
+    // 論壇管理
     { slug: "forum-categories", component: <ForumCategories /> },
     { slug: "forum-posts", component: <ForumPosts /> },
   ];

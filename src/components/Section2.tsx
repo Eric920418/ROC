@@ -3,96 +3,80 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Mail, Phone, Linkedin } from "lucide-react";
 import Image from "next/image";
+
+interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  yearsExperience: string;
+  avatar: string;
+  description: string;
+  experience: string[];
+  contact: {
+    email: string;
+    phone: string;
+    linkedin: string;
+  };
+}
+
+interface Section2Data {
+  title: string;
+  subtitle: string;
+  members: TeamMember[];
+}
+
+const defaultMembers: TeamMember[] = [
+  {
+    id: 1,
+    name: "李珈儀 Vivian",
+    role: "合夥人 / 行銷總監",
+    yearsExperience: "18+",
+    avatar: "/IMG_9001.jpg",
+    description: "執行專案：HBO Max、MEDIX ProClot、INSPO、AZUCAR、瀚寓酒店、娘家益生菌等",
+    experience: [
+      "塑造全球品牌形象，讓創意與客戶需求緊密結合",
+      "透過市場洞察與批判思考，驅動品牌系統化成長",
+      "跨領域合作",
+      "管理數位內容策略與績效追蹤，優化行銷成效",
+    ],
+    contact: { email: "chen@archspace.tw", phone: "+886 2 2345 6789", linkedin: "chen-yisen" },
+  },
+];
+
 export function Section2() {
-  // 團隊成員資料
-  const teamMembers = [
-    {
-      id: 1,
-      name: "李珈儀 Vivian",
-      role: "合夥人 / 行銷總監",
-      yearsExperience: "18+",
-      avatar: "/IMG_9001.jpg",
-      description:
-        "執行專案：HBO Max、MEDIX ProClot、INSPO、AZUCAR、瀚寓酒店、娘家益生菌等",
-      experience: [
-        "塑造全球品牌形象，讓創意與客戶需求緊密結合",
-        "透過市場洞察與批判思考，驅動品牌系統化成長",
-        "跨領域合作",
-        "管理數位內容策略與績效追蹤，優化行銷成效",
-      ],
-      contact: {
-        email: "chen@archspace.tw",
-        phone: "+886 2 2345 6789",
-        linkedin: "chen-yisen",
-      },
-    },
-    {
-      id: 2,
-      name: "李珈儀 Vivian",
-      role: "合夥人 / 行銷總監",
-      yearsExperience: "18+",
-      avatar: "/IMG_9001.jpg",
-      description:
-        "塑造全球品牌形象，讓創意與客戶需求緊密結合透過市場洞察與批判思考，驅動品牌系統化成長跨領域合作管理數位內容策略與績效追蹤，優化行銷成效",
-      experience: [
-        "HBO Max",
-        "MEDIX ProClot",
-        "INSPO",
-        "AZUCAR",
-        "瀚寓酒店",
-        "娘家益生菌",
-      ],
-      contact: {
-        email: "chen@archspace.tw",
-        phone: "+886 2 2345 6789",
-        linkedin: "chen-yisen",
-      },
-    },
-    {
-      id: 3,
-      name: "李珈儀 Vivian",
-      role: "合夥人 / 行銷總監",
-      yearsExperience: "18+",
-      avatar: "/IMG_9001.jpg",
-      description:
-        "塑造全球品牌形象，讓創意與客戶需求緊密結合透過市場洞察與批判思考，驅動品牌系統化成長跨領域合作管理數位內容策略與績效追蹤，優化行銷成效",
-      experience: [
-        "HBO Max",
-        "MEDIX ProClot",
-        "INSPO",
-        "AZUCAR",
-        "瀚寓酒店",
-        "娘家益生菌",
-      ],
-      contact: {
-        email: "chen@archspace.tw",
-        phone: "+886 2 2345 6789",
-        linkedin: "chen-yisen",
-      },
-    },
-    {
-      id: 4,
-      name: "李珈儀 Vivian",
-      role: "合夥人 / 行銷總監",
-      yearsExperience: "18+",
-      avatar: "/IMG_9001.jpg",
-      description:
-        "塑造全球品牌形象，讓創意與客戶需求緊密結合透過市場洞察與批判思考，驅動品牌系統化成長跨領域合作管理數位內容策略與績效追蹤，優化行銷成效",
-      experience: [
-        "HBO Max",
-        "MEDIX ProClot",
-        "INSPO",
-        "AZUCAR",
-        "瀚寓酒店",
-        "娘家益生菌",
-      ],
-      contact: {
-        email: "chen@archspace.tw",
-        phone: "+886 2 2345 6789",
-        linkedin: "chen-yisen",
-      },
-    },
-  ];
+  const [sectionData, setSectionData] = useState<Section2Data>({
+    title: "團隊成員",
+    subtitle: "Team Members",
+    members: defaultMembers,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/graphql", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `query { section2 { title subtitle members } }`,
+          }),
+        });
+        const { data } = await res.json();
+        if (data?.section2) {
+          setSectionData({
+            title: data.section2.title || "團隊成員",
+            subtitle: data.section2.subtitle || "Team Members",
+            members: data.section2.members?.length > 0 ? data.section2.members : defaultMembers,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch section2 data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const teamMembers = sectionData.members;
+  const memberCount = teamMembers.length;
 
   // 創建多組重複陣列實現真正的無限循環（重複5次）
   const extendedMembers = [
@@ -103,19 +87,27 @@ export function Section2() {
     ...teamMembers,
   ];
 
-  // 從中間組開始（第3組），teamMembers.length = 4，所以 initialIndex = 8
-  const [currentIndex, setCurrentIndex] = useState(teamMembers.length * 2);
+  // 從中間組開始（第3組）
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
+  // 當成員數據變化時，重置 currentIndex 到中間位置
+  useEffect(() => {
+    setCurrentIndex(memberCount * 2);
+  }, [memberCount]);
+
   // 自動輪播
   useEffect(() => {
+    // 只有當有多於1個成員時才自動輪播
+    if (memberCount <= 1) return;
+
     const timer = setInterval(() => {
-      handleNext();
+      setIsAnimating(true);
+      setCurrentIndex((prev) => prev + 1);
     }, 5000);
     return () => clearInterval(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [memberCount]);
 
   const handlePrev = () => {
     if (isAnimating) return;
@@ -136,28 +128,33 @@ export function Section2() {
     setIsAnimating(false);
 
     // 當接近邊界時，重置到中間對應的位置（無動畫，用戶看不出來）
-    // extendedMembers 總長度 = 20 (4x5)
-    // 安全範圍：索引 4-15
-    if (currentIndex <= 3) {
-      // 太靠左，跳到第3組對應位置
-      setCurrentIndex(currentIndex + teamMembers.length * 2);
-    } else if (currentIndex >= 16) {
-      // 太靠右，跳到第2組對應位置
-      setCurrentIndex(currentIndex - teamMembers.length * 2);
+    // extendedMembers 總長度 = memberCount * 5
+    // 安全範圍：索引 memberCount 到 memberCount * 4 - 1
+    const minSafeIndex = memberCount;
+    const maxSafeIndex = memberCount * 4 - 1;
+
+    if (currentIndex < minSafeIndex) {
+      // 太靠左，跳到中間對應位置
+      setCurrentIndex(currentIndex + memberCount * 2);
+    } else if (currentIndex > maxSafeIndex) {
+      // 太靠右，跳到中間對應位置
+      setCurrentIndex(currentIndex - memberCount * 2);
     }
   };
 
   // 計算真實的索引（用於指示點）
   const getRealIndex = () => {
-    return currentIndex % teamMembers.length;
+    if (memberCount === 0) return 0;
+    // 處理負數情況
+    return ((currentIndex % memberCount) + memberCount) % memberCount;
   };
 
   const goToSlide = (index: number) => {
-    if (!isAnimating) {
+    if (!isAnimating && memberCount > 0) {
       setIsAnimating(true);
       // 計算最近的對應索引（在當前所在組）
-      const currentGroup = Math.floor(currentIndex / teamMembers.length);
-      setCurrentIndex(currentGroup * teamMembers.length + index);
+      const currentGroup = Math.floor(currentIndex / memberCount);
+      setCurrentIndex(currentGroup * memberCount + index);
     }
   };
 
@@ -271,22 +268,22 @@ export function Section2() {
   };
 
   return (
-    <section className="w-full bg-white px-[96px] pt-8 pb-16 overflow-hidden">
+    <section className="w-full bg-white px-4 pt-8 pb-16 overflow-hidden md:px-[96px]">
       <div className="mx-auto max-w-[1680px]">
         {/* 標題區域 */}
         <div className="text-center mb-6">
           <h2 className="mb-4 text-3xl  text-brand-primary md:text-5xl font-bold">
-            團隊成員
+            {sectionData.title}
           </h2>
-          <p className="text-lg text-neutral-300">Team Members</p>
+          <p className="text-lg text-neutral-300">{sectionData.subtitle}</p>
         </div>
 
         {/* 卡片容器 - 3D 堆疊效果 */}
-        <div className="relative mx-auto h-[550px] w-full max-w-[1600px] perspective-2000">
+        <div className="relative mx-auto h-auto min-h-[400px] w-full max-w-[1600px] md:h-[550px] md:perspective-2000">
           {/* 左側切換按鈕 */}
           <button
             onClick={handlePrev}
-            disabled={isAnimating}
+            disabled={isAnimating || memberCount <= 1}
             className="absolute left-0 top-1/2 z-[60] -translate-y-1/2 rounded-full bg-white p-4 text-brand-primary shadow-2xl transition-all hover:scale-110 hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="上一位成員"
           >
@@ -296,7 +293,7 @@ export function Section2() {
           {/* 右側切換按鈕 */}
           <button
             onClick={handleNext}
-            disabled={isAnimating}
+            disabled={isAnimating || memberCount <= 1}
             className="absolute right-0 top-1/2 z-[60] -translate-y-1/2 rounded-full bg-white p-4 text-brand-primary shadow-2xl transition-all hover:scale-110 hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="下一位成員"
           >
@@ -304,7 +301,7 @@ export function Section2() {
           </button>
 
           <div
-            className="relative flex h-full items-center justify-center"
+            className="relative flex h-full items-center justify-center px-4 md:px-0"
             style={{ transformStyle: "preserve-3d" }}
           >
             {extendedMembers.map((member, index) => {
@@ -314,11 +311,13 @@ export function Section2() {
               return (
                 <div
                   key={`${member.id}-${index}`}
-                  className={`absolute cursor-pointer ${
+                  className={`cursor-pointer ${
+                    isCurrent ? "relative" : "absolute hidden md:block"
+                  } ${
                     isAnimating
                       ? "transition-all duration-500 ease-out"
                       : "transition-none"
-                  }`}
+                  } md:absolute`}
                   style={{
                     ...cardStyle,
                     transformStyle: "preserve-3d",
@@ -339,8 +338,9 @@ export function Section2() {
                   {/* 卡片主體 - 橫向佈局 */}
                   <div
                     className={`
-                    relative h-[540px] w-[680px] rounded-3xl p-8
-                    transition-all duration-500 flex gap-6
+                    relative h-auto w-[calc(100vw-2rem)] rounded-3xl p-4
+                    transition-all duration-500 flex flex-col gap-4
+                    md:h-[540px] md:w-[680px] md:p-8 md:flex-row md:gap-6
                     ${
                       isCurrent
                         ? "bg-white shadow-2xl ring-2 ring-brand-primary ring-offset-4"
@@ -433,7 +433,7 @@ export function Section2() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              disabled={isAnimating}
+              disabled={isAnimating || memberCount <= 1}
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 index === getRealIndex()
                   ? "w-10 bg-brand-primary"

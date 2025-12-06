@@ -26,7 +26,7 @@ export function Section7() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full overflow-hidden bg-white px-4 py-16 sm:px-8 md:px-12 lg:px-16 xl:px-24"
+      className="relative  w-full overflow-hidden bg-white px-4 py-16 sm:px-8 md:px-12 lg:px-16 xl:px-24"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">

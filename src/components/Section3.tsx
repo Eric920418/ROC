@@ -72,7 +72,7 @@ export function Section3() {
 
       {/* 主要內容區 */}
       <main className="relative z-10 flex h-screen items-center justify-center p-4 sm:p-8">
-        <div className="w-full  mx-auto  flex items-center justify-between">
+        <div className="w-full mx-auto flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
           {/* 左側：項目導航 */}
           <div className="">
             <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-2xl">
@@ -133,7 +133,7 @@ export function Section3() {
 
           {/* 右側：內容區 */}
           <div className="">
-            <div className="w-[300px] flex flex-col gap-6 bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-2xl">
+            <div className="w-full max-w-[300px] flex flex-col gap-6 bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-2xl">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <div className="h-1 w-12 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
