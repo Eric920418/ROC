@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -16,12 +16,20 @@ interface IpSecurityStatus {
 
 export default function LoginPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [ipStatus, setIpStatus] = useState<IpSecurityStatus | null>(null);
   const [isBlocked, setIsBlocked] = useState(false);
+
+  // 已登入用戶自動重定向到管理後台
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      router.replace("/admin/section1");
+    }
+  }, [status, session, router]);
 
   // 檢查 IP 封鎖狀態
   const checkIpStatus = async () => {
@@ -115,11 +123,22 @@ export default function LoginPage() {
     }
   };
 
+  // Session 檢查中或已登入，顯示 loading
+  if (status === "loading" || status === "authenticated") {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-md w-96">
+          <p className="text-center text-gray-500">載入中...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h1 className="text-2xl font-bold mb-6 text-center">管理員登入</h1>
-        
+
         {/* IP 狀態顯示 */}
         {ipStatus && ipStatus.attempts > 0 && !isBlocked && (
           <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4">

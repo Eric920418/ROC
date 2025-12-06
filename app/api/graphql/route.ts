@@ -190,6 +190,7 @@ async function verifyToken(request: any) {
 // 不需要驗證的 Mutations（公開 API）
 const PUBLIC_MUTATIONS = [
   'submitContactMessage', // 前台聯絡表單提交
+  'incrementPostViews',   // 瀏覽次數統計（匿名操作）
 ];
 
 // 權限包裝器 - 僅驗證 Token

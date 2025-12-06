@@ -113,6 +113,24 @@ pnpm dev
 | Section5 | 服務項目 | 網格布局、hover 動畫 |
 | Section6 | FAQ 問答 | 手風琴式展開 |
 
+## 論壇頁面設計
+
+論壇頁面採用現代藝術風格設計，特色包含：
+
+| 區塊 | 功能 | 設計特色 |
+|------|------|---------|
+| 分類導覽 | 文章篩選 | 圓角膠囊標籤、backdrop-blur 效果、動態顏色 |
+| 精選文章 | 焦點展示 | 大型 Hero 卡片、漸層遮罩、hover 縮放動畫 |
+| 文章網格 | 列表瀏覽 | 交錯布局、陰影層次、懸停動作按鈕 |
+| 分頁導航 | 翻頁操作 | 現代膠囊按鈕、禁用狀態處理 |
+
+### 視覺效果
+- **fadeInUp 動畫**：頁面載入時由下往上淡入
+- **交錯延遲**：文章卡片依序出現，創造流暢視覺節奏
+- **漸層背景**：從 neutral-50 到 white 的細膩過渡
+- **毛玻璃標籤**：backdrop-blur + 半透明背景
+- **hover 互動**：圖片縮放、陰影增強、動作按鈕浮現
+
 ## 後台管理功能
 
 ### 首頁區塊管理
@@ -184,12 +202,23 @@ model Comment {
 | 深灰 | `#57524c` | 次要文字 |
 | 黑色 | `#000000` | 主要文字 |
 
+## GraphQL API 權限設計
+
+### 公開 Mutations（不需驗證）
+以下 mutations 設計為匿名可執行，定義於 `app/api/graphql/route.ts` 的 `PUBLIC_MUTATIONS`：
+- `submitContactMessage` - 前台聯絡表單提交
+- `incrementPostViews` - 瀏覽次數統計（匿名操作）
+
+### 受保護 Mutations
+其他所有 mutations 需要有效的 Authorization Bearer Token。
+
 ## 注意事項
 
 - 永遠使用 `pnpm` 安裝套件
 - 禁止使用 `--accept-data-loss` 執行 Prisma 遷移
 - 所有錯誤完整顯示於前端便於調試
 - Port 3000 為預設開發端口
+- 登入頁面（`/admin/login`）會自動檢測用戶 session，已登入用戶將自動重定向至管理後台
 
 ## 響應式設計說明
 

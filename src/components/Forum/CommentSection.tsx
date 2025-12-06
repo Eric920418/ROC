@@ -65,7 +65,7 @@ export default function CommentSection({
       refetch();
     },
     onError: (error) => {
-      alert("评论发布失败：" + error.message);
+      alert("評論發布失敗：" + error.message);
     },
   });
 
@@ -73,7 +73,7 @@ export default function CommentSection({
     e.preventDefault();
 
     if (!author.trim() || !content.trim()) {
-      alert("请填写姓名和评论内容");
+      alert("請填寫姓名和評論內容");
       return;
     }
 
@@ -94,7 +94,7 @@ export default function CommentSection({
 
   const handleReply = async (parentId: number) => {
     if (!author.trim() || !replyContent.trim()) {
-      alert("请填写姓名和回复内容");
+      alert("請填寫姓名和回覆內容");
       return;
     }
 
@@ -117,33 +117,33 @@ export default function CommentSection({
   const comments: Comment[] = data?.comments || [];
 
   return (
-    <section className="mb-16">
-      <h2 className="text-3xl font-bold mb-8 text-neutral-900 dark:text-white flex items-center gap-3">
-        <MessageCircle className="w-8 h-8" />
-        评论区 ({comments.length})
+    <section className="mb-10">
+      <h2 className="text-lg font-bold mb-5 text-neutral-900 flex items-center gap-2">
+        <MessageCircle className="w-5 h-5" />
+        評論區 ({comments.length})
       </h2>
 
       {/* Comment Form */}
       {!isLocked && (
-        <form onSubmit={handleSubmit} className="mb-12">
-          <div className="bg-neutral-50 rounded-xl p-6">
-            <div className="mb-4">
+        <form onSubmit={handleSubmit} className="mb-8">
+          <div className="bg-neutral-50 rounded-lg p-4">
+            <div className="mb-3">
               <input
                 type="text"
                 placeholder="你的名字"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-neutral-900 text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
               <textarea
-                placeholder="写下你的评论..."
+                placeholder="寫下你的評論..."
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
+                rows={3}
+                className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-neutral-900 text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
                 required
               />
             </div>
@@ -151,10 +151,10 @@ export default function CommentSection({
               <button
                 type="submit"
                 disabled={creating}
-                className="px-6 py-3 bg-brand-primary text-white rounded-lg hover:opacity-90 transition-opacity font-semibold flex items-center gap-2 disabled:opacity-50"
+                className="px-4 py-2 bg-brand-primary text-white rounded-lg hover:opacity-90 transition-opacity font-medium flex items-center gap-1.5 disabled:opacity-50 text-xs"
               >
-                <Send className="w-4 h-4" />
-                {creating ? "发布中..." : "发布评论"}
+                <Send className="w-3.5 h-3.5" />
+                {creating ? "發布中..." : "發布評論"}
               </button>
             </div>
           </div>
@@ -162,44 +162,44 @@ export default function CommentSection({
       )}
 
       {isLocked && (
-        <div className="mb-12 bg-neutral-100 rounded-xl p-6 text-center text-neutral-600 dark:text-neutral-400">
-          🔒 此帖已锁定，无法发表新评论
+        <div className="mb-8 bg-neutral-100 rounded-lg p-4 text-center text-neutral-600 text-xs">
+          🔒 此文章已鎖定，無法發表新評論
         </div>
       )}
 
       {/* Comments List */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         {loading && (
-          <div className="text-center py-12 text-neutral-500 dark:text-neutral-400">
-            加载评论中...
+          <div className="text-center py-8 text-neutral-500 text-xs">
+            載入評論中...
           </div>
         )}
 
         {!loading && comments.length === 0 && (
-          <div className="text-center py-12 text-neutral-500 dark:text-neutral-400">
-            暂无评论，来发布第一条评论吧！
+          <div className="text-center py-8 text-neutral-500 text-xs">
+            尚無評論，來發布第一條評論吧！
           </div>
         )}
 
         {comments.map((comment) => (
-          <div key={comment.id} className="bg-neutral-50  rounded-xl p-6">
+          <div key={comment.id} className="bg-neutral-50 rounded-lg p-4">
             {/* Comment Header */}
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-7 h-7 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs">
                 {comment.author[0].toUpperCase()}
               </div>
               <div>
-                <p className="font-semibold text-neutral-900 dark:text-white">
+                <p className="font-medium text-neutral-900 text-xs">
                   {comment.author}
                 </p>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                  {new Date(comment.createdAt).toLocaleString("zh-CN")}
+                <p className="text-[10px] text-neutral-400">
+                  {new Date(comment.createdAt).toLocaleString("zh-TW")}
                 </p>
               </div>
             </div>
 
             {/* Comment Content */}
-            <p className="text-neutral-700 dark:text-neutral-300 mb-3 pl-13">
+            <p className="text-neutral-700 mb-2 pl-9 text-xs">
               {comment.content}
             </p>
 
@@ -207,36 +207,36 @@ export default function CommentSection({
             {!isLocked && (
               <button
                 onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
-                className="text-sm text-brand-primary hover:underline pl-13"
+                className="text-xs text-brand-primary hover:underline pl-9"
               >
-                {replyingTo === comment.id ? "取消回复" : "回复"}
+                {replyingTo === comment.id ? "取消回覆" : "回覆"}
               </button>
             )}
 
             {/* Reply Form */}
             {replyingTo === comment.id && (
-              <div className="mt-4 pl-13">
-                <div className="bg-white rounded-lg p-4">
+              <div className="mt-3 pl-9">
+                <div className="bg-white rounded-lg p-3">
                   <textarea
-                    placeholder="写下你的回复..."
+                    placeholder="寫下你的回覆..."
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
-                    rows={3}
-                    className="w-full px-4 py-3 mb-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-neutral-50  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
+                    rows={2}
+                    className="w-full px-3 py-2 mb-2 rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-900 text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
                   />
                   <div className="flex gap-2 justify-end">
                     <button
                       onClick={() => setReplyingTo(null)}
-                      className="px-4 py-2 bg-neutral-200  text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors"
+                      className="px-3 py-1.5 bg-neutral-200 text-neutral-700 rounded-lg hover:bg-neutral-300 transition-colors text-xs"
                     >
                       取消
                     </button>
                     <button
                       onClick={() => handleReply(comment.id)}
                       disabled={creating}
-                      className="px-4 py-2 bg-brand-primary text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                      className="px-3 py-1.5 bg-brand-primary text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 text-xs"
                     >
-                      {creating ? "发送中..." : "发送回复"}
+                      {creating ? "發送中..." : "發送回覆"}
                     </button>
                   </div>
                 </div>
@@ -245,23 +245,23 @@ export default function CommentSection({
 
             {/* Replies */}
             {comment.replies && comment.replies.length > 0 && (
-              <div className="mt-4 pl-13 space-y-4">
+              <div className="mt-3 pl-9 space-y-3">
                 {comment.replies.map((reply) => (
-                  <div key={reply.id} className="bg-white rounded-lg p-4">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-neutral-300  text-neutral-900 dark:text-white flex items-center justify-center font-bold text-sm">
+                  <div key={reply.id} className="bg-white rounded-lg p-3">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="w-6 h-6 rounded-full bg-neutral-300 text-neutral-700 flex items-center justify-center font-bold text-[10px]">
                         {reply.author[0].toUpperCase()}
                       </div>
                       <div>
-                        <p className="font-semibold text-neutral-900 dark:text-white text-sm">
+                        <p className="font-medium text-neutral-900 text-xs">
                           {reply.author}
                         </p>
-                        <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                          {new Date(reply.createdAt).toLocaleString("zh-CN")}
+                        <p className="text-[10px] text-neutral-400">
+                          {new Date(reply.createdAt).toLocaleString("zh-TW")}
                         </p>
                       </div>
                     </div>
-                    <p className="text-neutral-700 dark:text-neutral-300 text-sm pl-11">
+                    <p className="text-neutral-700 text-xs pl-8">
                       {reply.content}
                     </p>
                   </div>
