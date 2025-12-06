@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
-// 動態導入 CKEditor（僅客戶端）
-const CKEditor = dynamic(() => import("@/components/CKEditor"), {
+// 動態導入 CustomEditor（僅客戶端）
+const CustomEditor = dynamic(() => import("@/components/CustomEditor"), {
   ssr: false,
   loading: () => <p>編輯器載入中...</p>,
 });
@@ -97,7 +97,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
 
       {/* Title */}
       <div>
-        <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+        <label className="block text-neutral-900 font-semibold mb-2">
           標題 <span className="text-red-500">*</span>
         </label>
         <input
@@ -105,14 +105,14 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="輸入文章標題"
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
           required
         />
       </div>
 
       {/* Slug */}
       <div>
-        <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+        <label className="block text-neutral-900 font-semibold mb-2">
           URL 別名 <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-2">
@@ -121,13 +121,13 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
             placeholder="url-slug-example"
-            className="flex-1 px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="flex-1 px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
             required
           />
           <button
             type="button"
             onClick={generateSlug}
-            className="px-6 py-3 bg-neutral-200  text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors font-semibold"
+            className="px-6 py-3 bg-neutral-200 text-neutral-900 rounded-lg hover:bg-neutral-300 transition-colors font-semibold"
           >
             自動產生
           </button>
@@ -139,13 +139,13 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
 
       {/* Category */}
       <div>
-        <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+        <label className="block text-neutral-900 font-semibold mb-2">
           分類 <span className="text-red-500">*</span>
         </label>
         <select
           value={categoryId}
           onChange={(e) => setCategoryId(parseInt(e.target.value))}
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-whitetext-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
           required
         >
           {categories.map((cat) => (
@@ -158,7 +158,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
 
       {/* Cover Image */}
       <div>
-        <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+        <label className="block text-neutral-900 font-semibold mb-2">
           封面圖片 URL
         </label>
         <input
@@ -166,7 +166,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           value={coverImage}
           onChange={(e) => setCoverImage(e.target.value)}
           placeholder="https://example.com/image.jpg"
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
         />
         {coverImage && (
           <div className="mt-3">
@@ -185,7 +185,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
 
       {/* Excerpt */}
       <div>
-        <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+        <label className="block text-neutral-900 font-semibold mb-2">
           摘要
         </label>
         <textarea
@@ -193,24 +193,24 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
           onChange={(e) => setExcerpt(e.target.value)}
           placeholder="簡短的摘要，用於列表頁展示"
           rows={3}
-          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
+          className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
         />
       </div>
 
       {/* Content */}
       <div>
-        <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+        <label className="block text-neutral-900 font-semibold mb-2">
           內容 <span className="text-red-500">*</span>
         </label>
         <div className="border border-neutral-300 dark:border-neutral-600 rounded-lg overflow-hidden">
-          <CKEditor value={content} onChange={setContent} />
+          <CustomEditor onContentChange={setContent} placeholder="輸入文章內容..." height="400px" />
         </div>
       </div>
 
       {/* Author Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+          <label className="block text-neutral-900 font-semibold mb-2">
             作者名稱 <span className="text-red-500">*</span>
           </label>
           <input
@@ -218,12 +218,12 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="您的名字"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
             required
           />
         </div>
         <div>
-          <label className="block text-neutral-900 dark:text-white font-semibold mb-2">
+          <label className="block text-neutral-900 font-semibold mb-2">
             作者信箱（選填）
           </label>
           <input
@@ -231,7 +231,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
             value={authorEmail}
             onChange={(e) => setAuthorEmail(e.target.value)}
             placeholder="your@email.com"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white  text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-brand-primary"
           />
         </div>
       </div>
@@ -248,7 +248,7 @@ export default function NewPostForm({ categories }: { categories: Category[] }) 
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-8 py-4 bg-neutral-200  text-neutral-900 dark:text-white rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors font-semibold text-lg"
+          className="px-8 py-4 bg-neutral-200 text-neutral-900 rounded-lg hover:bg-neutral-300 transition-colors font-semibold text-lg"
         >
           取消
         </button>
