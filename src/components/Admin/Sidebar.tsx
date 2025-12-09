@@ -30,7 +30,7 @@ export const Sidebar = () => {
     <div className="flex flex-col h-full">
       <div
         className={`bg-gray-800 text-white ${
-          isOpen ? "w-64" : "w-16"
+          isOpen ? "w-[256px] min-w-[256px] max-w-[256px]" : "w-16"
         } flex-1 transition-all h-full flex flex-col`}
       >
         <div className="flex items-center justify-end p-4 flex-shrink-0">
@@ -112,6 +112,14 @@ export const Sidebar = () => {
               }`}
             >
               論壇文章
+            </Link>
+            <Link
+              href="/admin/forum-new"
+              className={`block px-4 py-2 hover:bg-gray-700 ${
+                pathname === "/admin/forum-new" ? "bg-gray-700" : ""
+              }`}
+            >
+              新增文章
             </Link>
           </nav>
         )}

@@ -4,10 +4,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   reactStrictMode: false, // 關閉 React Strict Mode
+  turbopack: {}, // Enable Turbopack (Next.js 16 default)
   // 添加 images 配置
   images: {
     remotePatterns: [

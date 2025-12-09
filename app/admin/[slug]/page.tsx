@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Sidebar } from "@/components/Admin/Sidebar";
 import { ForumCategories } from "@/components/Edit/ForumCategories";
 import { ForumPosts } from "@/components/Edit/ForumPosts";
+import { ForumNewPost } from "@/components/Edit/ForumNewPost";
 import { Section1Edit } from "@/components/Edit/Section1Edit";
 import { MarqueeEdit } from "@/components/Edit/MarqueeEdit";
 import { Section2Edit } from "@/components/Edit/Section2Edit";
@@ -39,6 +40,7 @@ export default function AdminPage() {
     // 論壇管理
     { slug: "forum-categories", component: <ForumCategories /> },
     { slug: "forum-posts", component: <ForumPosts /> },
+    { slug: "forum-new", component: <ForumNewPost /> },
   ];
 
   useEffect(() => {

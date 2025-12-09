@@ -44,12 +44,13 @@ const INCREMENT_VIEWS = gql`
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const client = getClient();
 
   // 解碼 URL 編碼的 slug（處理中文標題）
-  const decodedSlug = decodeURIComponent(params.slug);
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
 
   const { data } = await client.query({
     query: GET_POST,
