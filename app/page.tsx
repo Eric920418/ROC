@@ -6,18 +6,21 @@ import { Section5 } from "@/components/Section5";
 import { Section6 } from "@/components/Section6";
 import { Section7 } from "@/components/Section7";
 import { Marquee } from "@/components/Marquee";
+import { ScaleWrapper } from "@/components/ScaleWrapper";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
-      <Section1 />
-      <Marquee />
-      <Section7 />
-      <Section2 />
-      <Section3 />
-      <Section4 />
-      {/* <Section5 /> */}
-      <Section6 />
-    </main>
+    <ScaleWrapper baseWidth={1920} minWidth={1280}>
+      <main className="min-h-screen bg-white">
+        <Section1 />
+        <Marquee />
+        <Section7 />
+        <Section2 />
+        <Section3 />
+        <Section4 />
+        {/* <Section5 /> */}
+        <Section6 />
+      </main>
+    </ScaleWrapper>
   );
 }
