@@ -68,7 +68,7 @@ export function Marquee() {
         <div className="relative">
           {/* R.co + 後綴輪播區域 */}
           <div
-            className={`flex items-center justify-center gap-0 transition-opacity duration-700 ${
+            className={`flex items-center justify-center gap-0 transition-opacity duration-700 ml-[14%] ${
               isInCenter ? "opacity-0" : "opacity-100"
             }`}
           >
