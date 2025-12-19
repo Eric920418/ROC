@@ -40,12 +40,12 @@ export function Footer() {
           {/* 右側：導航與社交媒體 */}
           <div className="flex flex-col items-center gap-6 md:items-end">
             {/* 導航鏈接 */}
-            <nav className="flex items-center gap-6 text-white">
+            <nav className="flex flex-wrap items-center justify-center gap-3 text-white sm:gap-6">
               {navLinks.map((link, index) => (
-                <div key={link.href} className="flex items-center gap-6">
+                <div key={link.href} className="flex items-center gap-3 sm:gap-6">
                   <Link
                     href={link.href}
-                    className="text-base transition-colors hover:text-brand-primary md:text-lg"
+                    className="text-sm transition-colors hover:text-brand-primary sm:text-base md:text-lg"
                   >
                     {link.label}
                   </Link>

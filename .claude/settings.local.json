@@ -5,7 +5,8 @@
       "Bash(pnpm install:*)",
       "Bash(npx prisma db push:*)",
       "WebFetch(domain:go.apollo.dev)",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Bash(grep:*)"
     ],
     "defaultMode": "acceptEdits"
   }

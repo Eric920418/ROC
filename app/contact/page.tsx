@@ -113,17 +113,17 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-neutral-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="flex justify-between gap-8 lg:gap-16 items-start">
+        <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-16 items-start">
           {/* Left Column - Title & Info */}
           <div className=" space-y-12">
             <div className="relative">
               <h1
                 aria-hidden="true"
-                className="font-montserrat text-8xl md:text-9xl lg:text-[10rem] leading-none text-brand-primary uppercase absolute -top-8 lg:-top-12 -left-4 opacity-10 select-none"
+                className="font-montserrat text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-none text-brand-primary uppercase absolute -top-4 sm:-top-6 md:-top-8 lg:-top-12 -left-2 md:-left-4 opacity-10 select-none"
               >
                 {data.backgroundTitle}
               </h1>
-              <h1 className="font-montserrat text-7xl md:text-8xl lg:text-9xl text-neutral-900 uppercase relative z-10">
+              <h1 className="font-montserrat text-4xl sm:text-5xl md:text-7xl lg:text-9xl text-neutral-900 uppercase relative z-10">
                 {titleParts.map((part, index) => (
                   <span key={index}>
                     {part}
@@ -138,7 +138,7 @@ export default function ContactPage() {
                 {data.description}
               </p>
 
-              <div className="pt-4 space-y-4 flex  gap-8" >
+              <div className="pt-4 space-y-4 flex flex-col sm:flex-row gap-4 sm:gap-8">
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <svg

@@ -338,9 +338,9 @@ export function Section2() {
                   {/* 卡片主體 - 橫向佈局 */}
                   <div
                     className={`
-                    relative h-auto w-[calc(100vw-2rem)] rounded-3xl p-4
+                    relative h-auto w-full max-w-[calc(100vw-3rem)] rounded-3xl p-4
                     transition-all duration-500 flex flex-col gap-4
-                    md:h-[540px] md:w-[680px] md:p-8 md:flex-row md:gap-6
+                    md:h-[540px] md:w-[680px] md:max-w-none md:p-8 md:flex-row md:gap-6
                     ${
                       isCurrent
                         ? "bg-white shadow-2xl ring-2 ring-brand-primary ring-offset-4"

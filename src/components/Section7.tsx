@@ -131,8 +131,8 @@ export function Section7() {
             {/* 圖片網格 */}
             <div className="relative h-full w-full">
               {/* 左側方形圖片 */}
-              <div className="absolute left-[0%] top-[50%] z-20 -translate-y-1/2">
-                <div className="group h-40 w-40 overflow-hidden rounded-xl shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl lg:h-[200px] lg:w-[330px]">
+              <div className="absolute left-0 top-[50%] z-20 -translate-y-1/2">
+                <div className="group h-24 w-24 overflow-hidden rounded-xl shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl sm:h-32 sm:w-32 md:h-40 md:w-40 lg:h-[200px] lg:w-[330px]">
                   <div
                     className="h-full w-full bg-contain bg-no-repeat bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{
@@ -143,8 +143,8 @@ export function Section7() {
               </div>
 
               {/* 右上小方形圖片 */}
-              <div className="absolute right-[10%] top-[15%] z-20">
-                <div className="group h-32 w-32 overflow-hidden rounded-lg shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl lg:h-[180px] lg:w-[320px]">
+              <div className="absolute right-0 top-[10%] z-20 sm:right-[5%] md:right-[10%] md:top-[15%]">
+                <div className="group h-20 w-20 overflow-hidden rounded-lg shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl sm:h-24 sm:w-24 md:h-32 md:w-32 lg:h-[180px] lg:w-[320px]">
                   <div
                     className="h-full w-full bg-contain bg-no-repeat bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{
@@ -156,8 +156,8 @@ export function Section7() {
               </div>
 
               {/* 右下大矩形圖片 */}
-              <div className="absolute bottom-[5%] right-[20%] z-20">
-                <div className="group h-32 w-64 overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl lg:h-[230px] lg:w-[520px]">
+              <div className="absolute bottom-[5%] right-0 z-20 sm:right-[5%] md:right-[10%] lg:right-[20%]">
+                <div className="group h-20 w-36 overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl sm:h-24 sm:w-44 md:h-32 md:w-64 lg:h-[230px] lg:w-[520px]">
                   <div
                     className="h-full w-full bg-contain bg-no-repeat bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{

@@ -77,15 +77,15 @@ export default function AboutPage() {
   const [year, month] = data.foundedDate.split('/');
 
   return (
-    <div className="min-h-screen bg-neutral-100">
-      <div className="container mx-auto px-6 pb-12 md:px-12">
+    <div className="min-h-screen bg-neutral-100 overflow-x-hidden">
+      <div className="container mx-auto px-4 pb-12 sm:px-6 md:px-12">
         <main className=" space-y-16">
           {/* Section 1: Who is R.collective? */}
           <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div className="relative pt-8 md:pt-16">
               <div className="relative inline-block">
                 <div className="circle-outline"></div>
-                <h2 className="font-montserrat text-5xl md:text-6xl font-bold uppercase tracking-tighter relative z-10">
+                <h2 className="font-montserrat text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tighter relative z-10">
                   {titleParts.map((part, index) => (
                     <span key={index}>
                       {part}
@@ -134,7 +134,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="md:col-span-2 md:text-center">
-                <h3 className="text-brand-primary font-montserrat text-7xl md:text-9xl font-bold lowercase">
+                <h3 className="text-brand-primary font-montserrat text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold lowercase">
                   about us
                 </h3>
               </div>
@@ -158,8 +158,8 @@ export default function AboutPage() {
           <hr className="border-neutral-200" />
 
           {/* Section 3: The Visionary */}
-          <section className="flex gap-12 items-center">
-            <div className="space-y-6 text-center md:text-left flex flex-col items-center w-1/2">
+          <section className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+            <div className="space-y-6 text-center md:text-left flex flex-col items-center w-full md:w-1/2">
               <div className="w-full max-w-sm mx-auto md:mx-0 h-96 bg-neutral-200 rounded-lg flex items-center justify-center overflow-hidden relative">
                 {data.founderImage ? (
                   <Image
@@ -172,15 +172,15 @@ export default function AboutPage() {
                   <span className="text-neutral-300 text-lg">Portrait Image</span>
                 )}
               </div>
-              <div className="flex items-baseline justify-center md:justify-start gap-8">
-                <p className="text-sm text-neutral-300">Founded in Taiwan</p>
-                <p className="font-montserrat text-4xl font-bold">
+              <div className="flex items-baseline justify-center md:justify-start gap-4 sm:gap-8">
+                <p className="text-xs sm:text-sm text-neutral-300">Founded in Taiwan</p>
+                <p className="font-montserrat text-2xl sm:text-3xl md:text-4xl font-bold">
                   {year}<span className="text-neutral-300">/{month}</span>
                 </p>
               </div>
             </div>
-            <div className="space-y-8">
-              <h4 className="font-montserrat text-3xl font-bold tracking-widest uppercase">
+            <div className="space-y-6 md:space-y-8 w-full md:w-1/2">
+              <h4 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-bold tracking-wide md:tracking-widest uppercase">
                 {data.visionTitle}
               </h4>
               <div className="space-y-6 text-neutral-300 leading-relaxed">
@@ -212,7 +212,7 @@ export default function AboutPage() {
               <blockquote className="text-lg italic text-neutral-900 mb-4">
                 {data.quote}
               </blockquote>
-              <cite className="font-montserrat font-bold text-2xl not-italic tracking-widest text-brand-primary">
+              <cite className="font-montserrat font-bold text-lg sm:text-xl md:text-2xl not-italic tracking-wide md:tracking-widest text-brand-primary">
                 {data.quoteAuthor}
               </cite>
             </div>
@@ -274,10 +274,26 @@ export default function AboutPage() {
           border-radius: 9999px;
           transform: rotate(-15deg);
           position: absolute;
-          top: -1rem;
-          left: -1rem;
-          width: 10rem;
-          height: 4.5rem;
+          top: -0.5rem;
+          left: -0.5rem;
+          width: 6rem;
+          height: 3rem;
+        }
+        @media (min-width: 640px) {
+          .circle-outline {
+            top: -0.75rem;
+            left: -0.75rem;
+            width: 8rem;
+            height: 3.5rem;
+          }
+        }
+        @media (min-width: 768px) {
+          .circle-outline {
+            top: -1rem;
+            left: -1rem;
+            width: 10rem;
+            height: 4.5rem;
+          }
         }
       `}</style>
     </div>
