@@ -17,13 +17,13 @@ export function Marquee() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // 後綴圖片列表（可個別調整 offsetX 來控制與 Logo 的距離，負數代表向左移動）
+  // 後綴圖片列表（桌面版和手機版分別設定 offsetX）
   const suffixImages = [
-    { src: "/coEdge-blue.png", alt: "Edge", offsetX: -215, offsetY: 2 },      // 調整這個數值
-    { src: "/connect-blue.png", alt: "nnect", offsetX: -190, offsetY: 2 },    // 調整這個數值
-    { src: "/compose-blue.png", alt: "mpose", offsetX: -170, offsetY: 0 },    // 調整這個數值
-    { src: "/cohort-blue.png", alt: "hort", offsetX: -230, offsetY: 0 },      // 調整這個數值
-    { src: "/collective-blue.png", alt: "llective", offsetX: -170, offsetY: 0 }, // 調整這個數值
+    { src: "/coEdge-blue.png", alt: "Edge", offsetX: -215, offsetXMobile: -50, offsetY: 2 },
+    { src: "/connect-blue.png", alt: "nnect", offsetX: -190, offsetXMobile: -45, offsetY: 2 },
+    { src: "/compose-blue.png", alt: "mpose", offsetX: -170, offsetXMobile: -40, offsetY: 0 },
+    { src: "/cohort-blue.png", alt: "hort", offsetX: -230, offsetXMobile: -55, offsetY: 0 },
+    { src: "/collective-blue.png", alt: "llective", offsetX: -170, offsetXMobile: -40, offsetY: 0 },
   ];
 
   // 檢測區塊是否在視窗垂直居中
@@ -68,7 +68,7 @@ export function Marquee() {
         <div className="relative">
           {/* R.co + 後綴輪播區域 */}
           <div
-            className={`flex items-center justify-center gap-0 transition-opacity duration-700 ml-[14%] ${
+            className={`flex items-center justify-center gap-0 transition-opacity duration-700 ml-4 md:ml-[14%] ${
               isInCenter ? "opacity-0" : "opacity-100"
             }`}
           >
@@ -79,26 +79,26 @@ export function Marquee() {
                 alt="R.co"
                 width={300}
                 height={80}
-                className="h-[60px] w-auto object-contain md:h-[120px]"
+                className="h-[50px] w-auto object-contain md:h-[120px]"
                 priority
               />
             </div>
 
             {/* 輪播的後綴圖片 */}
-            <div
-              className="relative flex items-center justify-start overflow-hidden w-[200px] h-[150px] md:w-[550px] md:h-[300px]"
-            >
+            <div className="relative flex items-center justify-start overflow-hidden w-[150px] h-[80px] md:w-[550px] md:h-[300px]">
               {suffixImages.map((image, index) => (
                 <div
                   key={image.src}
-                  className={`absolute left-0 top-0 flex h-full w-full items-center justify-start transition-all duration-1000 ease-in-out ${
+                  className={`absolute left-1 top-[50%] md:top-0 -translate-y-1/2 md:translate-y-0 flex h-full w-full items-center justify-start transition-all duration-1000 ease-in-out ${
                     index === currentIndex
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 -translate-y-4"
+                      ? "opacity-100 md:translate-y-0"
+                      : "opacity-0 md:-translate-y-4"
                   }`}
                   style={{
-                    marginLeft: `${isMobile ? image.offsetX * 0.4 : image.offsetX}px`,
-                    marginTop: `${image.offsetY}px`,
+                    marginLeft: `${
+                      isMobile ? image.offsetXMobile : image.offsetX
+                    }px`,
+                    marginTop: isMobile ? 0 : image.offsetY,
                   }}
                 >
                   <Image
@@ -106,7 +106,7 @@ export function Marquee() {
                     alt={image.alt}
                     width={800}
                     height={500}
-                    className="h-full object-contain object-left scale-[0.5] md:scale-[1.1]"
+                    className="h-[200px] scale-[1.65] w-auto object-contain object-left md:h-full md:scale-[1.1]"
                     priority={index === 0}
                   />
                 </div>

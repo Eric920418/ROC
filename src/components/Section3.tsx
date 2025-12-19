@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 export function Section3() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,6 +52,14 @@ export function Section3() {
 
   const currentProject = projects[currentIndex];
 
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <section className="relative h-screen w-full bg-white overflow-hidden my-16">
       {/* 全屏背景圖片 */}
@@ -73,8 +81,8 @@ export function Section3() {
       {/* 主要內容區 */}
       <main className="relative z-10 flex h-screen items-center justify-center p-4 sm:p-8">
         <div className="w-full mx-auto flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
-          {/* 左側：項目導航 */}
-          <div className="">
+          {/* 左側：項目導航 - 僅在 md 以上顯示 */}
+          <div className="hidden md:block">
             <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-2xl">
               <div className="flex flex-col gap-4">
                 <div className="mb-4 pb-4 border-b border-white/20">
@@ -93,7 +101,7 @@ export function Section3() {
                       onClick={() => setCurrentIndex(index)}
                       className={`group flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
                         index === currentIndex
-                          ? "bg-gradient-to-r from-amber-400/90 to-amber-500/90 shadow-lg scale-105"
+                          ? "bg-brand-primary shadow-lg scale-105"
                           : "bg-white/5 hover:bg-white/15"
                       }`}
                     >
@@ -101,7 +109,7 @@ export function Section3() {
                         <span
                           className={`text-xs font-bold ${
                             index === currentIndex
-                              ? "text-black"
+                              ? "text-white"
                               : "text-white/50"
                           }`}
                         >
@@ -110,7 +118,7 @@ export function Section3() {
                         <span
                           className={`text-sm font-medium tracking-wide ${
                             index === currentIndex
-                              ? "text-black"
+                              ? "text-white"
                               : "text-white/80"
                           }`}
                         >
@@ -120,7 +128,7 @@ export function Section3() {
                       <ArrowRight
                         className={`h-4 w-4 transition-transform duration-300 ${
                           index === currentIndex
-                            ? "text-black translate-x-1"
+                            ? "text-white translate-x-1"
                             : "text-white/40 group-hover:translate-x-1"
                         }`}
                       />
@@ -133,10 +141,10 @@ export function Section3() {
 
           {/* 右側：內容區 */}
           <div className="">
-            <div className="w-full max-w-[300px] flex flex-col gap-6 bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow-2xl">
+            <div className="w-full max-w-[300px] flex flex-col gap-4 md:gap-6 bg-white/10 backdrop-blur-lg p-5 md:p-6 rounded-2xl border border-white/20 shadow-2xl">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
-                  <div className="h-1 w-12 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" />
+                  <div className="h-1 w-12 bg-brand-primary rounded-full" />
                   <span className="text-white/60 text-xs font-medium tracking-widest uppercase">
                     {currentProject.id} / 05
                   </span>
@@ -146,20 +154,55 @@ export function Section3() {
                   {currentProject.title}
                 </h1>
 
-                <h2 className="text-sm font-medium text-amber-400/90">
+                <h2 className="text-sm font-medium text-white/90">
                   {currentProject.subtitle}
                 </h2>
 
-                <p className="text-base leading-relaxed text-white/80">
+                <p className="text-sm md:text-base leading-relaxed text-white/80">
                   {currentProject.description}
                 </p>
               </div>
 
-              <button className="group flex items-center justify-center gap-2 w-full px-2 py-1 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black text-base font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+              {/* 手機版導航控制 - 僅在 md 以下顯示 */}
+              <div className="flex md:hidden items-center justify-between">
+                <button
+                  onClick={goToPrev}
+                  className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+                  aria-label="上一個"
+                >
+                  <ChevronLeft className="h-5 w-5 text-white" />
+                </button>
+
+                {/* 點狀分頁指示器 */}
+                <div className="flex items-center gap-2">
+                  {projects.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentIndex(index)}
+                      className={`transition-all duration-300 rounded-full ${
+                        index === currentIndex
+                          ? "w-6 h-2 bg-brand-primary"
+                          : "w-2 h-2 bg-white/40 hover:bg-white/60"
+                      }`}
+                      aria-label={`切換到第 ${index + 1} 個項目`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={goToNext}
+                  className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+                  aria-label="下一個"
+                >
+                  <ChevronRight className="h-5 w-5 text-white" />
+                </button>
+              </div>
+
+              <button className="group flex items-center justify-center gap-2 w-full px-2 py-1 bg-brand-primary hover:bg-brand-primary/90 text-white text-base font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                 <span>探索更多</span>
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
-           
+
             </div>
           </div>
         </div>

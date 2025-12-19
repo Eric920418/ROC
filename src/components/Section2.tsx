@@ -268,7 +268,7 @@ export function Section2() {
   };
 
   return (
-    <section className="w-full bg-white px-4 pt-8 pb-16 overflow-hidden md:px-[96px]">
+    <section className="w-full bg-white px-4 pt-8 pb-8 overflow-hidden md:px-[96px]">
       <div className="mx-auto max-w-[1680px]">
         {/* 標題區域 */}
         <div className="text-center mb-6">
@@ -280,21 +280,21 @@ export function Section2() {
 
         {/* 卡片容器 - 3D 堆疊效果 */}
         <div className="relative mx-auto h-auto min-h-[400px] w-full max-w-[1600px] md:h-[550px] md:perspective-2000">
-          {/* 左側切換按鈕 */}
+          {/* 左側切換按鈕 - 只在桌面版顯示 */}
           <button
             onClick={handlePrev}
             disabled={isAnimating || memberCount <= 1}
-            className="absolute left-0 top-1/2 z-[60] -translate-y-1/2 rounded-full bg-white p-4 text-brand-primary shadow-2xl transition-all hover:scale-110 hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed"
+            className="hidden md:block absolute left-0 top-1/2 z-[60] -translate-y-1/2 rounded-full bg-white p-4 text-brand-primary shadow-2xl transition-all hover:scale-110 hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="上一位成員"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
 
-          {/* 右側切換按鈕 */}
+          {/* 右側切換按鈕 - 只在桌面版顯示 */}
           <button
             onClick={handleNext}
             disabled={isAnimating || memberCount <= 1}
-            className="absolute right-0 top-1/2 z-[60] -translate-y-1/2 rounded-full bg-white p-4 text-brand-primary shadow-2xl transition-all hover:scale-110 hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed"
+            className="hidden md:block absolute right-0 top-1/2 z-[60] -translate-y-1/2 rounded-full bg-white p-4 text-brand-primary shadow-2xl transition-all hover:scale-110 hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="下一位成員"
           >
             <ChevronRight className="h-6 w-6" />
@@ -427,8 +427,28 @@ export function Section2() {
           </div>
         </div>
 
+        {/* 手機版底部箭頭 */}
+        <div className="flex md:hidden justify-center gap-6 mt-4">
+          <button
+            onClick={handlePrev}
+            disabled={isAnimating || memberCount <= 1}
+            className="rounded-full bg-white p-3 text-brand-primary shadow-lg transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="上一位成員"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={isAnimating || memberCount <= 1}
+            className="rounded-full bg-white p-3 text-brand-primary shadow-lg transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="下一位成員"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+
         {/* 指示點 */}
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-4 md:mt-8 flex justify-center gap-2">
           {teamMembers.map((_, index) => (
             <button
               key={index}

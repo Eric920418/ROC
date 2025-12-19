@@ -73,8 +73,8 @@ export function Section1() {
               <span className="text-2xl font-medium text-brand-primary md:text-3xl lg:text-4xl">
                 {data.tagline}
               </span>
-              <button className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-primary text-white shadow-lg transition-transform hover:scale-105">
-                <ArrowDown className="h-6 w-6" />
+              <button className="flex h-10 w-10 lg:h-14 lg:w-14  items-center justify-center rounded-full bg-brand-primary text-white shadow-lg transition-transform hover:scale-105">
+                <ArrowDown className="h-4 w-4 lg:h-6 lg:w-6" />
               </button>
             </div>
 
