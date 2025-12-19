@@ -15,6 +15,7 @@ export function ScaleWrapper({
 }: ScaleWrapperProps) {
   const [scale, setScale] = useState(1);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -22,12 +23,16 @@ export function ScaleWrapper({
     const updateScale = () => {
       const viewportWidth = window.innerWidth;
 
-      if (viewportWidth >= baseWidth) {
+      // 手機版不縮放，保持原本的響應式設計
+      if (viewportWidth < minWidth) {
+        setIsMobile(true);
         setScale(1);
-      } else if (viewportWidth >= minWidth) {
-        setScale(viewportWidth / baseWidth);
+      } else if (viewportWidth >= baseWidth) {
+        setIsMobile(false);
+        setScale(1);
       } else {
-        setScale(minWidth / baseWidth);
+        setIsMobile(false);
+        setScale(viewportWidth / baseWidth);
       }
     };
 
@@ -39,6 +44,11 @@ export function ScaleWrapper({
 
   // SSR 時先不縮放，避免 hydration mismatch
   if (!mounted) {
+    return <>{children}</>;
+  }
+
+  // 手機版直接渲染，不套用縮放
+  if (isMobile) {
     return <>{children}</>;
   }
 

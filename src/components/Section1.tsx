@@ -59,7 +59,7 @@ export function Section1() {
           {/* 左側內容 */}
           <div className="flex flex-col justify-start w-full md:w-[60%]">
             {/* 大標題 */}
-            <h1 className="flex flex-col mb-[24px] text-4xl font-light leading-tight text-neutral-200 md:text-6xl lg:text-[96px]">
+            <h1 className="flex flex-col mb-[24px] text-2xl font-light leading-tight text-neutral-200 sm:text-4xl md:text-6xl xl:text-[96px]">
               <span className="text-neutral-200 leading-none tracking-wide">
                 {data.titleLeft}
               </span>
