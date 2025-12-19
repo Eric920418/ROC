@@ -119,11 +119,11 @@ export default function ContactPage() {
             <div className="relative">
               <h1
                 aria-hidden="true"
-                className="font-montserrat text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-none text-brand-primary uppercase absolute -top-4 sm:-top-6 md:-top-8 lg:-top-12 -left-2 md:-left-4 opacity-10 select-none"
+                className="font-montserrat text-5xl sm:text-6xl md:text-8xl  leading-none text-brand-primary uppercase absolute -top-4 sm:-top-6 md:-top-8 lg:-top-12 -left-2 md:-left-4 opacity-10 select-none"
               >
                 {data.backgroundTitle}
               </h1>
-              <h1 className="font-montserrat text-4xl sm:text-5xl md:text-7xl lg:text-9xl text-neutral-900 uppercase relative z-10">
+              <h1 className="font-montserrat text-4xl sm:text-5xl md:text-7xl  text-neutral-900 uppercase relative z-10 ">
                 {titleParts.map((part, index) => (
                   <span key={index}>
                     {part}
