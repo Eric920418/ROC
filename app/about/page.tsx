@@ -135,7 +135,7 @@ export default function AboutPage() {
               </div>
               <div className="md:col-span-2 md:text-center">
                 <h3 className="text-brand-primary font-montserrat text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold lowercase">
-                  about us
+                  ABOUT US
                 </h3>
               </div>
               <div className="flex justify-end items-center gap-4 md:col-span-1">
