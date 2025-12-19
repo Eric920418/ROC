@@ -1,33 +1,75 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+
+interface Testimonial {
+  title: string;
+  description: string;
+  image: string;
+}
+
+interface Section4Data {
+  label: string;
+  ctaText: string;
+  ctaLink: string;
+  testimonials: Testimonial[];
+}
+
+const defaultTestimonials: Testimonial[] = [
+  {
+    title: "我的咖啡廳，風格由我來定義！",
+    description:
+      "咖啡不止要好喝，更要脫穎而出。我們與專業團隊合作，打造獨一無二的咖啡廳體驗。",
+    image: "/Mask group4.png",
+  },
+];
 
 export function Section4() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [sectionData, setSectionData] = useState<Section4Data>({
+    label: "CLIENT TESTIMONIALS",
+    ctaText: "查看更多客戶回饋",
+    ctaLink: "#",
+    testimonials: defaultTestimonials,
+  });
 
-  const testimonials = [
-    {
-      title: "我的咖啡廳，風格由我來定義！",
-      description:
-        "咖啡不止要好喝，更要脫穎而出2025年我們與Bean In Motion合作咖啡廳加速器計劃BIM今年11月剛從宏都拉進口4噸評分90分以上的藝妓咖啡豆手工挑選最優質的咖啡豆，到小批量慢火烘焙提倡咖啡不只是「一克多少錢」的交易，而是一場文化交流剛進台灣市場馬上銷售一空我們能拿出54 種咖啡風味的香氣樣本，逐一介紹讓你挑選一同體驗風味差異。更完整的為創業家設計咖啡廳創業課程為您打造一間能獲利、承載生活價值的咖啡廳A 入門組合適合小型外帶咖啡店（5-10坪）給剛嘗試投入咖啡產業內容包含：品牌命名與標誌設計、基礎室內設計、咖啡豆供應、咖啡機設備",
-      image: "/Mask group4.png",
-    },
-    {
-      title: "空間設計超越期待，每個細節都讓人驚艷",
-      description:
-        "從第一次諮詢到最後完工，整個過程都非常順利。設計師不僅理解我們的需求，還提出了許多創新的想法。完成後的空間完全符合我們的生活方式。",
-      image: "/Mask group.png",
-    },
-    {
-      title: "專業、用心、值得信賴的設計團隊",
-      description:
-        "選擇他們是我做過最正確的決定。從材質挑選到施工細節，每個環節都處理得非常到位。完工後的品質遠超預期，真心推薦給所有追求品質的朋友。",
-      image: "/Mask group2.png",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/graphql", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `query { section4 { label ctaText ctaLink testimonials } }`,
+          }),
+        });
+        const { data } = await res.json();
+        if (data?.section4) {
+          setSectionData({
+            label: data.section4.label || "CLIENT TESTIMONIALS",
+            ctaText: data.section4.ctaText || "查看更多客戶回饋",
+            ctaLink: data.section4.ctaLink || "#",
+            testimonials: data.section4.testimonials?.length > 0 ? data.section4.testimonials : defaultTestimonials,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch section4 data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const testimonials = sectionData.testimonials;
+
+  // 確保 currentIndex 在有效範圍內
+  useEffect(() => {
+    if (currentIndex >= testimonials.length) {
+      setCurrentIndex(0);
+    }
+  }, [testimonials.length, currentIndex]);
 
   const handleDotClick = (index: number) => {
     if (isTransitioning || index === currentIndex) return;
@@ -36,7 +78,12 @@ export function Section4() {
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
-  const currentTestimonial = testimonials[currentIndex];
+  const currentTestimonial = testimonials[currentIndex] || testimonials[0];
+
+  // 防止 currentTestimonial 為 undefined
+  if (!currentTestimonial) {
+    return null;
+  }
 
   return (
     <section className="relative flex min-h-screen w-full items-center justify-center bg-white px-4 py-8 sm:px-6 md:px-8">
@@ -63,7 +110,7 @@ export function Section4() {
             <div className="flex flex-col gap-6">
               {/* 標籤 */}
               <p className="text-sm font-semibold uppercase tracking-widest text-neutral-300">
-                CLIENT TESTIMONIALS
+                {sectionData.label}
               </p>
 
               {/* 標題 */}
@@ -81,10 +128,10 @@ export function Section4() {
               {/* CTA 連結 */}
               <div className="pt-6">
                 <a
-                  href="#"
+                  href={sectionData.ctaLink}
                   className="group inline-flex items-center gap-2 text-neutral-900 transition-colors hover:text-brand-primary"
                 >
-                  <span className="text-sm font-medium">查看更多客戶回饋</span>
+                  <span className="text-sm font-medium">{sectionData.ctaText}</span>
 
                   {/* 動態底線 */}
                   <div className="relative h-px w-10 overflow-hidden bg-neutral-300/50">

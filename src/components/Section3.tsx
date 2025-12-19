@@ -1,56 +1,84 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+
+interface Project {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+}
+
+interface Section3Data {
+  navTitle: string;
+  navSubtitle: string;
+  projects: Project[];
+}
+
+const defaultProjects: Project[] = [
+  {
+    id: "01",
+    title: "設計客廳",
+    subtitle: "當代生活的核心空間",
+    description:
+      "當代客廳的骨架。設計師的重點。是一種日常的構築藝術。每一個角落都是精心規劃，每一道光線都經過計算。",
+    image: "/Mask group.png",
+  },
+  {
+    id: "02",
+    title: "當代設計書房",
+    subtitle: "思考與創作的聖地",
+    description:
+      "極簡的線條，柔和的光，重拾不必多，只要剛好。在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光，足以築起整個世界的地基。",
+    image: "/Mask group2.png",
+  },
+];
 
 export function Section3() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [sectionData, setSectionData] = useState<Section3Data>({
+    navTitle: "空間探索",
+    navSubtitle: "SPACE EXPLORATION",
+    projects: defaultProjects,
+  });
 
-  const projects = [
-    {
-      id: "01",
-      title: "設計客廳",
-      subtitle: "當代生活的核心空間",
-      description:
-        "當代客廳的骨架。設計師的重點。是一種日常的構築藝術。每一個角落都是精心規劃，每一道光線都經過計算。",
-      image: "/Mask group.png",
-    },
-    {
-      id: "02",
-      title: "當代設計書房",
-      subtitle: "思考與創作的聖地",
-      description:
-        "極簡的線條，柔和的光，重拾不必多，只要剛好。在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光，足以築起整個世界的地基。",
-      image: "/Mask group2.png",
-    },
-    {
-      id: "03",
-      title: "當代廚房",
-      subtitle: "料理與生活的交會",
-      description:
-        "極簡的線條，柔和的光，在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光。功能與美學的完美平衡。",
-      image: "/Mask group4.png",
-    },
-    {
-      id: "04",
-      title: "當代臥室",
-      subtitle: "寧靜休憩的避風港",
-      description:
-        "極簡的線條，柔和的光，在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光。回歸最純粹的休息本質。",
-      image: "/Mask group.png",
-    },
-    {
-      id: "05",
-      title: "當代浴室",
-      subtitle: "私密的療癒空間",
-      description:
-        "極簡的線條，柔和的光，在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光。水與石的詩意對話。",
-      image: "/Mask group2.png",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/graphql", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `query { section3 { navTitle navSubtitle projects } }`,
+          }),
+        });
+        const { data } = await res.json();
+        if (data?.section3) {
+          setSectionData({
+            navTitle: data.section3.navTitle || "空間探索",
+            navSubtitle: data.section3.navSubtitle || "SPACE EXPLORATION",
+            projects: data.section3.projects?.length > 0 ? data.section3.projects : defaultProjects,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch section3 data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const currentProject = projects[currentIndex];
+  const projects = sectionData.projects;
+  const currentProject = projects[currentIndex] || projects[0];
+
+  // 確保 currentIndex 在有效範圍內
+  useEffect(() => {
+    if (currentIndex >= projects.length) {
+      setCurrentIndex(0);
+    }
+  }, [projects.length, currentIndex]);
 
   const goToPrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
@@ -59,6 +87,11 @@ export function Section3() {
   const goToNext = () => {
     setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
   };
+
+  // 防止 currentProject 為 undefined
+  if (!currentProject) {
+    return null;
+  }
 
   return (
     <section className="relative h-screen w-full bg-white overflow-hidden my-16">
@@ -87,10 +120,10 @@ export function Section3() {
               <div className="flex flex-col gap-4">
                 <div className="mb-4 pb-4 border-b border-white/20">
                   <h2 className="text-white text-xl font-bold tracking-tight">
-                    空間探索
+                    {sectionData.navTitle}
                   </h2>
                   <p className="text-white/70 text-sm mt-1">
-                    SPACE EXPLORATION
+                    {sectionData.navSubtitle}
                   </p>
                 </div>
 
@@ -146,7 +179,7 @@ export function Section3() {
                 <div className="flex items-center gap-2">
                   <div className="h-1 w-12 bg-brand-primary rounded-full" />
                   <span className="text-white/60 text-xs font-medium tracking-widest uppercase">
-                    {currentProject.id} / 05
+                    {currentProject.id} / {String(projects.length).padStart(2, '0')}
                   </span>
                 </div>
 
