@@ -16,20 +16,8 @@ interface Section1Data {
   bottomDescription: string;
 }
 
-const defaultData: Section1Data = {
-  titleLeft: "Contemporary",
-  titleRight: "Design",
-  tagline: "當代設計",
-  leftImage: "/Mask group.png",
-  rightTopText: "we create the onysica presence your identity deserves.",
-  rightTopTagline: "我的風格，由我來定義",
-  rightImage: "/Mask group2.png",
-  bottomTitle: "做出120%的作品非常不容易",
-  bottomDescription: "剝除多餘的裝飾\n創造永不退流行的設計空間",
-};
-
 export function Section1() {
-  const [data, setData] = useState<Section1Data>(defaultData);
+  const [data, setData] = useState<Section1Data | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +31,7 @@ export function Section1() {
         });
         const { data: resData } = await res.json();
         if (resData?.section1) {
-          setData({ ...defaultData, ...resData.section1 });
+          setData(resData.section1);
         }
       } catch (error) {
         console.error("Failed to fetch section1 data:", error);
@@ -51,6 +39,11 @@ export function Section1() {
     };
     fetchData();
   }, []);
+
+  // 資料未載入時不渲染，避免閃爍
+  if (!data) {
+    return null;
+  }
 
   return (
     <section className="w-full bg-white px-4 py-8 md:px-[96px]">
@@ -81,7 +74,7 @@ export function Section1() {
             {/* 左側大圖 */}
             <div className="relative w-full aspect-[1420/800] overflow-hidden rounded-3xl shadow-xl">
               <Image
-                src={data.leftImage || "/Mask group.png"}
+                src={data.leftImage}
                 alt="Contemporary Interior Design"
                 fill
                 className="object-contain"
@@ -101,7 +94,7 @@ export function Section1() {
             {/* 右側圖片 */}
             <div className="relative aspect-[932/400] w-full overflow-hidden rounded-3xl shadow-xl mb-8 md:mb-[64px]">
               <Image
-                src={data.rightImage || "/Mask group2.png"}
+                src={data.rightImage}
                 alt="Minimalist Desk Setup"
                 fill
                 className="object-contain"

@@ -18,32 +18,9 @@ interface Section3Data {
   projects: Project[];
 }
 
-const defaultProjects: Project[] = [
-  {
-    id: "01",
-    title: "設計客廳",
-    subtitle: "當代生活的核心空間",
-    description:
-      "當代客廳的骨架。設計師的重點。是一種日常的構築藝術。每一個角落都是精心規劃，每一道光線都經過計算。",
-    image: "/Mask group.png",
-  },
-  {
-    id: "02",
-    title: "當代設計書房",
-    subtitle: "思考與創作的聖地",
-    description:
-      "極簡的線條，柔和的光，重拾不必多，只要剛好。在留白中思考，在寧靜裡前進。一張桌，一把椅，一盞光，足以築起整個世界的地基。",
-    image: "/Mask group2.png",
-  },
-];
-
 export function Section3() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [sectionData, setSectionData] = useState<Section3Data>({
-    navTitle: "空間探索",
-    navSubtitle: "SPACE EXPLORATION",
-    projects: defaultProjects,
-  });
+  const [sectionData, setSectionData] = useState<Section3Data | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,9 +35,9 @@ export function Section3() {
         const { data } = await res.json();
         if (data?.section3) {
           setSectionData({
-            navTitle: data.section3.navTitle || "空間探索",
-            navSubtitle: data.section3.navSubtitle || "SPACE EXPLORATION",
-            projects: data.section3.projects?.length > 0 ? data.section3.projects : defaultProjects,
+            navTitle: data.section3.navTitle,
+            navSubtitle: data.section3.navSubtitle,
+            projects: data.section3.projects || [],
           });
         }
       } catch (error) {
@@ -70,15 +47,21 @@ export function Section3() {
     fetchData();
   }, []);
 
-  const projects = sectionData.projects;
-  const currentProject = projects[currentIndex] || projects[0];
-
   // 確保 currentIndex 在有效範圍內
+  const projectsLength = sectionData?.projects?.length || 0;
   useEffect(() => {
-    if (currentIndex >= projects.length) {
+    if (projectsLength > 0 && currentIndex >= projectsLength) {
       setCurrentIndex(0);
     }
-  }, [projects.length, currentIndex]);
+  }, [projectsLength, currentIndex]);
+
+  // 資料未載入時不渲染，避免閃爍
+  if (!sectionData || sectionData.projects.length === 0) {
+    return null;
+  }
+
+  const projects = sectionData.projects;
+  const currentProject = projects[currentIndex] || projects[0];
 
   const goToPrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));

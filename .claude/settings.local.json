@@ -6,7 +6,8 @@
       "Bash(npx prisma db push:*)",
       "WebFetch(domain:go.apollo.dev)",
       "Bash(pnpm build:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git -C /var/www/ROC log:*)"
     ],
     "defaultMode": "acceptEdits"
   }

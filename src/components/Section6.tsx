@@ -14,24 +14,9 @@ interface Section6Data {
   faqs: FAQ[];
 }
 
-const defaultFaqs: FAQ[] = [
-  {
-    question: "你怎麼定義「當代設計」？",
-    answer: "對我來說，當代設計不是一種風格，而是一種態度。\n它關注當下的生活方式、材質的真實性與環境的回應。",
-  },
-  {
-    question: "你的靈感通常來自哪裡？",
-    answer: "靈感來自日常生活的觀察，旅行中的建築體驗，\n以及與業主深度對話後理解的需求。\n每個空間都有它獨特的故事。",
-  },
-];
-
 export function Section6() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [sectionData, setSectionData] = useState<Section6Data>({
-    title: "QA",
-    leftDescription: "線條簡潔、比例純粹\n當代住宅不唯噩於形\n而讓空間自己說話\n\n少一分裝飾，多一分真實",
-    faqs: defaultFaqs,
-  });
+  const [sectionData, setSectionData] = useState<Section6Data | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,9 +31,9 @@ export function Section6() {
         const { data } = await res.json();
         if (data?.section6) {
           setSectionData({
-            title: data.section6.title || "QA",
-            leftDescription: data.section6.leftDescription || "",
-            faqs: data.section6.faqs?.length > 0 ? data.section6.faqs : defaultFaqs,
+            title: data.section6.title,
+            leftDescription: data.section6.leftDescription,
+            faqs: data.section6.faqs || [],
           });
         }
       } catch (error) {
@@ -58,6 +43,11 @@ export function Section6() {
     fetchData();
   }, []);
 
+  // 資料未載入時不渲染，避免閃爍
+  if (!sectionData || sectionData.faqs.length === 0) {
+    return null;
+  }
+
   const faqs = sectionData.faqs;
 
   const handleToggle = (index: number) => {
@@ -65,12 +55,12 @@ export function Section6() {
   };
 
   return (
-    <section className="w-full bg-white px-4 py-16 md:px-[96px]">
+    <section className="w-full bg-white px-4 py-10 md:px-[96px] md:py-12">
       <div className="mx-auto max-w-[1680px]">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_2fr]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
           {/* 左側：標題與描述 */}
-          <div className="space-y-8">
-            <h2 className="text-4xl font-light text-neutral-900 md:text-6xl lg:text-7xl">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-light text-neutral-900 md:text-5xl lg:text-6xl">
               {sectionData.title}
             </h2>
             <div className="space-y-4 text-sm leading-relaxed text-neutral-300 md:text-base whitespace-pre-line">
@@ -79,7 +69,7 @@ export function Section6() {
           </div>
 
           {/* 右側：FAQ 列表 */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
@@ -88,7 +78,7 @@ export function Section6() {
                 {/* 問題標題 */}
                 <button
                   onClick={() => handleToggle(index)}
-                  className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-neutral-50"
+                  className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-neutral-50 md:px-6 md:py-5"
                 >
                   <h3 className="pr-4 text-lg font-medium text-neutral-900 md:text-xl">
                     {faq.question}
@@ -114,7 +104,7 @@ export function Section6() {
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="border-t border-neutral-100 px-6 pb-6 pt-4 md:px-8 md:pb-8">
+                  <div className="border-t border-neutral-100 px-5 pb-4 pt-3 md:px-6 md:pb-5">
                     <p className="whitespace-pre-line text-sm leading-relaxed text-neutral-300 md:text-base">
                       {faq.answer}
                     </p>

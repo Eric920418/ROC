@@ -17,24 +17,10 @@ interface Section4Data {
   testimonials: Testimonial[];
 }
 
-const defaultTestimonials: Testimonial[] = [
-  {
-    title: "我的咖啡廳，風格由我來定義！",
-    description:
-      "咖啡不止要好喝，更要脫穎而出。我們與專業團隊合作，打造獨一無二的咖啡廳體驗。",
-    image: "/Mask group4.png",
-  },
-];
-
 export function Section4() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [sectionData, setSectionData] = useState<Section4Data>({
-    label: "CLIENT TESTIMONIALS",
-    ctaText: "查看更多客戶回饋",
-    ctaLink: "#",
-    testimonials: defaultTestimonials,
-  });
+  const [sectionData, setSectionData] = useState<Section4Data | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,10 +35,10 @@ export function Section4() {
         const { data } = await res.json();
         if (data?.section4) {
           setSectionData({
-            label: data.section4.label || "CLIENT TESTIMONIALS",
-            ctaText: data.section4.ctaText || "查看更多客戶回饋",
-            ctaLink: data.section4.ctaLink || "#",
-            testimonials: data.section4.testimonials?.length > 0 ? data.section4.testimonials : defaultTestimonials,
+            label: data.section4.label,
+            ctaText: data.section4.ctaText,
+            ctaLink: data.section4.ctaLink,
+            testimonials: data.section4.testimonials || [],
           });
         }
       } catch (error) {
@@ -62,14 +48,20 @@ export function Section4() {
     fetchData();
   }, []);
 
-  const testimonials = sectionData.testimonials;
-
   // 確保 currentIndex 在有效範圍內
+  const testimonialsLength = sectionData?.testimonials?.length || 0;
   useEffect(() => {
-    if (currentIndex >= testimonials.length) {
+    if (testimonialsLength > 0 && currentIndex >= testimonialsLength) {
       setCurrentIndex(0);
     }
-  }, [testimonials.length, currentIndex]);
+  }, [testimonialsLength, currentIndex]);
+
+  // 資料未載入時不渲染，避免閃爍
+  if (!sectionData || sectionData.testimonials.length === 0) {
+    return null;
+  }
+
+  const testimonials = sectionData.testimonials;
 
   const handleDotClick = (index: number) => {
     if (isTransitioning || index === currentIndex) return;

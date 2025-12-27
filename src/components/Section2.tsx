@@ -25,30 +25,13 @@ interface Section2Data {
   members: TeamMember[];
 }
 
-const defaultMembers: TeamMember[] = [
-  {
-    id: 1,
-    name: "李珈儀 Vivian",
-    role: "合夥人 / 行銷總監",
-    yearsExperience: "18+",
-    avatar: "/IMG_9001.jpg",
-    description: "執行專案：HBO Max、MEDIX ProClot、INSPO、AZUCAR、瀚寓酒店、娘家益生菌等",
-    experience: [
-      "塑造全球品牌形象，讓創意與客戶需求緊密結合",
-      "透過市場洞察與批判思考，驅動品牌系統化成長",
-      "跨領域合作",
-      "管理數位內容策略與績效追蹤，優化行銷成效",
-    ],
-    contact: { email: "chen@archspace.tw", phone: "+886 2 2345 6789", linkedin: "chen-yisen" },
-  },
-];
-
 export function Section2() {
-  const [sectionData, setSectionData] = useState<Section2Data>({
-    title: "團隊成員",
-    subtitle: "Team Members",
-    members: defaultMembers,
-  });
+  const [sectionData, setSectionData] = useState<Section2Data | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const memberCount = sectionData?.members?.length || 0;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,9 +46,9 @@ export function Section2() {
         const { data } = await res.json();
         if (data?.section2) {
           setSectionData({
-            title: data.section2.title || "團隊成員",
-            subtitle: data.section2.subtitle || "Team Members",
-            members: data.section2.members?.length > 0 ? data.section2.members : defaultMembers,
+            title: data.section2.title,
+            subtitle: data.section2.subtitle,
+            members: data.section2.members || [],
           });
         }
       } catch (error) {
@@ -75,26 +58,11 @@ export function Section2() {
     fetchData();
   }, []);
 
-  const teamMembers = sectionData.members;
-  const memberCount = teamMembers.length;
-
-  // 創建多組重複陣列實現真正的無限循環（重複5次）
-  const extendedMembers = [
-    ...teamMembers,
-    ...teamMembers,
-    ...teamMembers,
-    ...teamMembers,
-    ...teamMembers,
-  ];
-
-  // 從中間組開始（第3組）
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
   // 當成員數據變化時，重置 currentIndex 到中間位置
   useEffect(() => {
-    setCurrentIndex(memberCount * 2);
+    if (memberCount > 0) {
+      setCurrentIndex(memberCount * 2);
+    }
   }, [memberCount]);
 
   // 自動輪播
@@ -108,6 +76,22 @@ export function Section2() {
     }, 5000);
     return () => clearInterval(timer);
   }, [memberCount]);
+
+  // 資料未載入時不渲染，避免閃爍
+  if (!sectionData || sectionData.members.length === 0) {
+    return null;
+  }
+
+  const teamMembers = sectionData.members;
+
+  // 創建多組重複陣列實現真正的無限循環（重複5次）
+  const extendedMembers = [
+    ...teamMembers,
+    ...teamMembers,
+    ...teamMembers,
+    ...teamMembers,
+    ...teamMembers,
+  ];
 
   const handlePrev = () => {
     if (isAnimating) return;
