@@ -182,7 +182,7 @@ export default function AboutPage() {
           </section>
 
           {/* Section 4: Quote */}
-          <section className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          <section className="max-w-xl mx-auto  gap-8 items-center">
             <div className="md:col-span-2">
               <blockquote className="text-lg italic text-neutral-900 mb-4">
                 {data.quote}
