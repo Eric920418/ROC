@@ -15,6 +15,7 @@
 - **後台管理系統**（基於 NextAuth 認證、區塊化內容編輯）
 - **RWD 響應式設計**，支援手機與桌機瀏覽
 - **豐富的動畫效果**（3D 卡片層疊、全屏沉浸式展示、手風琴展開等）
+- **滾動出場動畫**（首頁各區塊在滾動進入視口時動態出現）
 
 ## 開發亮點
 
@@ -93,6 +94,7 @@ pnpm dev
 │   └── schema.prisma         # 資料庫模型
 ├── src/components/
 │   ├── Section1-7.tsx        # 首頁各區塊組件
+│   ├── AnimatedSection.tsx   # 滾動出場動畫組件
 │   ├── Header.tsx            # 全局導航欄
 │   ├── Footer.tsx            # 頁尾組件
 │   ├── Edit/                 # 後台編輯組件
@@ -130,6 +132,47 @@ pnpm dev
 - **漸層背景**：從 neutral-50 到 white 的細膩過渡
 - **毛玻璃標籤**：backdrop-blur + 半透明背景
 - **hover 互動**：圖片縮放、陰影增強、動作按鈕浮現
+
+## 滾動出場動畫系統
+
+首頁採用 Framer Motion 實現滾動觸發的出場動畫效果：
+
+### 動畫組件
+- `AnimatedSection` - 滾動進入視口時觸發動畫
+- `HeroAnimation` - 頁面載入時立即播放（用於首屏）
+
+### 支援的動畫類型
+| 類型 | 效果 |
+|------|------|
+| fadeUp | 從下往上淡入（預設） |
+| fadeDown | 從上往下淡入 |
+| fadeIn | 原地淡入 |
+| slideLeft | 從左側滑入 |
+| slideRight | 從右側滑入 |
+| scale | 縮放淡入 |
+
+### 使用方式
+```tsx
+import { AnimatedSection, HeroAnimation } from "@/components/AnimatedSection";
+
+// 首屏立即動畫
+<HeroAnimation delay={0.1} duration={0.8}>
+  <Section1 />
+</HeroAnimation>
+
+// 滾動觸發動畫
+<AnimatedSection animation="fadeUp" delay={0.1}>
+  <Section2 />
+</AnimatedSection>
+```
+
+### 參數說明
+| 參數 | 類型 | 預設值 | 說明 |
+|------|------|--------|------|
+| animation | string | fadeUp | 動畫類型 |
+| delay | number | 0 | 延遲時間（秒） |
+| duration | number | 0.6 | 動畫時長（秒） |
+| once | boolean | true | 是否只播放一次 |
 
 ## 後台管理功能
 
@@ -190,6 +233,14 @@ model Comment {
   replies  Comment[]
 }
 ```
+
+## 字體配置
+
+| 字體 | CSS 變數 | 用途 |
+|------|----------|------|
+| Montserrat | `--font-montserrat` | 英文主字體 |
+| Noto Sans TC | `--font-noto-sans-tc` | 中文主字體 |
+| Adobe Caslon Pro Semibold | `--font-caslon` | 標題裝飾字體（Section1 大標題、極簡現代風標題） |
 
 ## 品牌色系
 

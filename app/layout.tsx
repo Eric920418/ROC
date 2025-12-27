@@ -26,6 +26,13 @@ const notoSansTC = localFont({
   display: "swap",
 });
 
+// 配置 Adobe Caslon Pro 字體（用於標題）
+const adobeCaslonPro = localFont({
+  src: "../public/Adobe Caslon Pro Semibold.ttf",
+  variable: "--font-caslon",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "R.co - 您的專業平台",
   description: "R.co 提供專業服務與資訊交流平台",
@@ -50,7 +57,7 @@ export default function RootLayout({
         `}</style>
       </head>
       <body
-        className={`${montserrat.variable} ${notoSansTC.variable} min-h-screen bg-white text-slate-900`}
+        className={`${montserrat.variable} ${notoSansTC.variable} ${adobeCaslonPro.variable} min-h-screen bg-white text-slate-900`}
       >
         <Providers>{children}</Providers>
       </body>

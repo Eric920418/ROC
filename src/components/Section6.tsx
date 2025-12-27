@@ -57,7 +57,7 @@ export function Section6() {
   return (
     <section className="w-full bg-white px-4 py-10 md:px-[96px] md:py-12">
       <div className="mx-auto max-w-[1680px]">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
           {/* 左側：標題與描述 */}
           <div className="space-y-4">
             <h2 className="text-3xl font-light text-neutral-900 md:text-5xl lg:text-6xl">

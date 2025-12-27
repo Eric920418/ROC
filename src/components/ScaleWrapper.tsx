@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface ScaleWrapperProps {
   children: React.ReactNode;
@@ -16,6 +16,8 @@ export function ScaleWrapper({
   const [scale, setScale] = useState(1);
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [contentHeight, setContentHeight] = useState<number | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -42,6 +44,21 @@ export function ScaleWrapper({
     return () => window.removeEventListener("resize", updateScale);
   }, [baseWidth, minWidth]);
 
+  // 監測內容高度變化，動態調整容器高度
+  useEffect(() => {
+    if (!contentRef.current || isMobile) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setContentHeight(entry.contentRect.height);
+      }
+    });
+
+    resizeObserver.observe(contentRef.current);
+
+    return () => resizeObserver.disconnect();
+  }, [isMobile, mounted]);
+
   // SSR 時先不縮放，避免 hydration mismatch
   if (!mounted) {
     return <>{children}</>;
@@ -52,19 +69,23 @@ export function ScaleWrapper({
     return <>{children}</>;
   }
 
+  // 計算縮放後的實際高度
+  const scaledHeight = contentHeight ? contentHeight * scale : undefined;
+
   return (
     <div
       style={{
         width: "100%",
+        height: scaledHeight ? `${scaledHeight}px` : "auto",
         overflow: "hidden",
       }}
     >
       <div
+        ref={contentRef}
         style={{
           width: `${baseWidth}px`,
           transform: `scale(${scale})`,
           transformOrigin: "top left",
-          minHeight: scale < 1 ? `calc(100vh / ${scale})` : "100vh",
         }}
       >
         {children}

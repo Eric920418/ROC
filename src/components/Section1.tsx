@@ -52,7 +52,7 @@ export function Section1() {
           {/* 左側內容 */}
           <div className="flex flex-col justify-start w-full md:w-[60%]">
             {/* 大標題 */}
-            <h1 className="flex flex-col mb-[24px] text-2xl font-light leading-tight text-neutral-200 sm:text-4xl md:text-6xl xl:text-[96px]">
+            <h1 className="flex flex-col mb-[24px] text-2xl font-light leading-tight text-neutral-200 sm:text-4xl md:text-6xl xl:text-[96px]" style={{ fontFamily: 'var(--font-caslon)' }}>
               <span className="text-neutral-200 leading-none tracking-wide">
                 {data.titleLeft}
               </span>
@@ -103,7 +103,7 @@ export function Section1() {
 
             {/* 極簡現代風 */}
             <div className="space-y-4">
-              <h3 className="text-2xl font-medium text-brand-primary lg:text-3xl">
+              <h3 className="text-2xl font-medium text-brand-primary lg:text-3xl" style={{ fontFamily: 'var(--font-caslon)' }}>
                 {data.bottomTitle}
               </h3>
               <p className="text-sm leading-relaxed lg:text-base whitespace-pre-line">
