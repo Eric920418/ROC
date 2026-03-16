@@ -42,12 +42,12 @@ export function Section7() {
             }`}
           >
             <div className="space-y-8">
-              <h1 className="text-2xl lg:text-4xl font-bold leading-tight tracking-tight text-neutral-900 ">
+              <h1 className="text-3xl md:text-5xl font-bold leading-tight tracking-tight text-neutral-900 ">
                 立足台灣
                 <br />
                 放眼全球
               </h1>
-              <p className="text-sm font-normal leading-relaxed text-neutral-300">
+              <p className="text-sm md:text-base font-normal leading-relaxed text-neutral-300">
                 從台北到台中，我們在台灣深耕多年，為在地客戶打造獨一無二的當代設計空間。
                 <br />
                 <br />

@@ -52,7 +52,7 @@ export function Section1() {
           {/* 左側內容 */}
           <div className="flex flex-col justify-start w-full md:w-[60%]">
             {/* 大標題 */}
-            <h1 className="flex flex-col mb-[24px] text-2xl font-light leading-tight text-neutral-200 sm:text-4xl md:text-6xl xl:text-[96px]" style={{ fontFamily: 'var(--font-caslon)' }}>
+            <h1 className="flex flex-col mb-[24px] text-3xl font-light leading-tight text-neutral-200 sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-caslon)' }}>
               <span className="text-neutral-200 leading-none tracking-wide">
                 {data.titleLeft}
               </span>
@@ -63,7 +63,7 @@ export function Section1() {
 
             {/* 當代設計按鈕 */}
             <div className="mb-8 flex items-center gap-4 md:mb-[64px] md:gap-[24px]">
-              <span className="text-2xl font-medium text-brand-primary md:text-3xl lg:text-4xl">
+              <span className="text-2xl font-medium text-brand-primary md:text-3xl">
                 {data.tagline}
               </span>
               <button className="flex h-10 w-10 lg:h-14 lg:w-14  items-center justify-center rounded-full bg-brand-primary text-white shadow-lg transition-transform hover:scale-105">
@@ -86,10 +86,10 @@ export function Section1() {
           {/* 右側內容 */}
           <div className="flex flex-col justify-start flex-1">
             <div className="flex flex-col gap-2 items-start md:items-end mb-[12px] mt-4 md:mt-[176px]">
-              <p className="text-sm font-medium md:text-[18px]">
+              <p className="text-sm font-medium md:text-base">
                 {data.rightTopText}
               </p>
-              <div className="text-brand-primary text-xl font-medium md:text-[32px]">{data.rightTopTagline}</div>
+              <div className="text-brand-primary text-xl font-medium md:text-2xl">{data.rightTopTagline}</div>
             </div>
             {/* 右側圖片 */}
             <div className="relative aspect-[932/400] w-full overflow-hidden rounded-3xl shadow-xl mb-8 md:mb-[64px]">
@@ -103,10 +103,10 @@ export function Section1() {
 
             {/* 極簡現代風 */}
             <div className="space-y-4">
-              <h3 className="text-2xl font-medium text-brand-primary lg:text-3xl" style={{ fontFamily: 'var(--font-caslon)' }}>
+              <h3 className="text-2xl font-medium text-brand-primary md:text-3xl" style={{ fontFamily: 'var(--font-caslon)' }}>
                 {data.bottomTitle}
               </h3>
-              <p className="text-sm leading-relaxed lg:text-base whitespace-pre-line">
+              <p className="text-sm leading-relaxed md:text-base whitespace-pre-line">
                 {data.bottomDescription}
               </p>
             </div>

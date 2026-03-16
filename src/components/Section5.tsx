@@ -46,7 +46,7 @@ export function Section5() {
     <section className="w-full bg-white px-4 py-8 md:px-[96px]">
       <div className="mx-auto max-w-[1680px]">
         {/* 標題 */}
-        <h2 className="mb-12 text-5xl  text-brand-primary font-bold md:text-6xl ">
+        <h2 className="mb-12 text-3xl  text-brand-primary font-bold md:text-5xl ">
           服務
         </h2>
 
@@ -76,7 +76,7 @@ export function Section5() {
 
               {/* 標題 */}
               <div className="space-y-1">
-                <h3 className="text-lg font-medium text-neutral-900 transition-colors duration-300 group-hover:text-brand-primary md:text-xl">
+                <h3 className="text-xl font-medium text-neutral-900 transition-colors duration-300 group-hover:text-brand-primary md:text-2xl">
                   {service.title}
                 </h3>
               </div>

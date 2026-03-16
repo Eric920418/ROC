@@ -259,7 +259,7 @@ export function Section2() {
           <h2 className="mb-4 text-3xl  text-brand-primary md:text-5xl font-bold">
             {sectionData.title}
           </h2>
-          <p className="text-lg text-neutral-300">{sectionData.subtitle}</p>
+          <p className="text-sm md:text-base text-neutral-300">{sectionData.subtitle}</p>
         </div>
 
         {/* 卡片容器 - 3D 堆疊效果 */}
@@ -353,7 +353,7 @@ export function Section2() {
 
                       {/* 基本資訊 */}
                       <div className="mb-3 text-center">
-                        <h3 className="mb-4 text-2xl font-medium text-neutral-900">
+                        <h3 className="mb-4 text-xl md:text-2xl font-medium text-neutral-900">
                           {member.name}
                         </h3>
                         <p className="mb-4 text-sm text-brand-primary">
@@ -373,7 +373,7 @@ export function Section2() {
                     {/* 右側：文字資訊 */}
                     <div className="flex flex-col items-center justify-center">
                       {/* 簡介 */}
-                      <p className="mb-3 text-sm leading-relaxed text-neutral-300">
+                      <p className="mb-3 text-sm md:text-base leading-relaxed text-neutral-300">
                         {member.description}
                       </p>
 

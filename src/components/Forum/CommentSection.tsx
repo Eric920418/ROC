@@ -118,7 +118,7 @@ export default function CommentSection({
 
   return (
     <section className="mb-10">
-      <h2 className="text-lg font-bold mb-5 text-neutral-900 flex items-center gap-2">
+      <h2 className="text-xl md:text-2xl font-bold mb-5 text-neutral-900 flex items-center gap-2">
         <MessageCircle className="w-5 h-5" />
         評論區 ({comments.length})
       </h2>

@@ -60,7 +60,7 @@ export function Section6() {
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
           {/* 左側：標題與描述 */}
           <div className="space-y-4">
-            <h2 className="text-3xl font-light text-neutral-900 md:text-5xl lg:text-6xl">
+            <h2 className="text-3xl font-light text-neutral-900 md:text-5xl">
               {sectionData.title}
             </h2>
             <div className="space-y-4 text-sm leading-relaxed text-neutral-300 md:text-base whitespace-pre-line">
@@ -80,7 +80,7 @@ export function Section6() {
                   onClick={() => handleToggle(index)}
                   className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-neutral-50 md:px-6 md:py-5"
                 >
-                  <h3 className="pr-4 text-lg font-medium text-neutral-900 md:text-xl">
+                  <h3 className="pr-4 text-xl font-medium text-neutral-900 md:text-2xl">
                     {faq.question}
                   </h3>
                   <div className="flex-shrink-0">

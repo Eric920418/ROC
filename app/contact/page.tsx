@@ -119,11 +119,11 @@ export default function ContactPage() {
             <div className="relative">
               <h1
                 aria-hidden="true"
-                className="font-montserrat text-5xl sm:text-6xl md:text-8xl  leading-none text-brand-primary uppercase absolute -top-4 sm:-top-6 md:-top-8 lg:-top-12 -left-2 md:-left-4 opacity-10 select-none"
+                className="font-montserrat text-4xl md:text-6xl  leading-none text-brand-primary uppercase absolute -top-4 sm:-top-6 md:-top-8 lg:-top-12 -left-2 md:-left-4 opacity-10 select-none"
               >
                 {data.backgroundTitle}
               </h1>
-              <h1 className="font-montserrat text-4xl sm:text-5xl md:text-7xl  text-neutral-900 uppercase relative z-10 ">
+              <h1 className="font-montserrat text-3xl md:text-5xl  text-neutral-900 uppercase relative z-10 ">
                 {titleParts.map((part, index) => (
                   <span key={index}>
                     {part}
@@ -134,7 +134,7 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-6 text-neutral-300">
-              <p className="text-lg leading-relaxed">
+              <p className="text-sm md:text-base leading-relaxed">
                 {data.description}
               </p>
 
@@ -181,8 +181,8 @@ export default function ContactPage() {
                 <div className="relative ">
 
                   <div className="relative z-10 pl-4 border-l-2 border-brand-primary">
-                    <h3 className="font-bold text-neutral-900">{data.studioName}</h3>
-                    <p className="text-neutral-300">
+                    <h3 className="text-xl md:text-2xl font-bold text-neutral-900">{data.studioName}</h3>
+                    <p className="text-sm md:text-base text-neutral-300">
                       {addressLines.map((line, index) => (
                         <span key={index}>
                           {line}

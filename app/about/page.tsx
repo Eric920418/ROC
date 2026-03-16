@@ -85,7 +85,7 @@ export default function AboutPage() {
             <div className="relative pt-8 md:pt-16">
               <div className="relative inline-block">
                 <div className="circle-outline"></div>
-                <h2 className="font-montserrat text-3xl sm:text-4xl md:text-5xl  font-bold uppercase tracking-tighter relative z-10">
+                <h2 className="font-montserrat text-3xl md:text-5xl  font-bold uppercase tracking-tighter relative z-10">
                   {titleParts.map((part, index) => (
                     <span key={index}>
                       {part}
@@ -96,7 +96,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="pt-8 md:pt-16">
-              <p className="text-neutral-300 leading-relaxed text-base">
+              <p className="text-neutral-300 leading-relaxed text-sm md:text-base">
                 {data.whoIsDescription}
               </p>
             </div>
@@ -171,10 +171,10 @@ export default function AboutPage() {
           
             </div>
             <div className="space-y-6 md:space-y-8 w-full md:w-1/2">
-              <h4 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-bold tracking-wide md:tracking-widest uppercase">
+              <h4 className="font-montserrat text-2xl md:text-3xl font-bold tracking-wide md:tracking-widest uppercase">
                 {data.visionTitle}
               </h4>
-              <div className="space-y-6 text-neutral-300 leading-relaxed text-base">
+              <div className="space-y-6 text-neutral-300 leading-relaxed text-sm md:text-base">
                 <p>{data.visionDescription1}</p>
                 <p>{data.visionDescription2}</p>
               </div>

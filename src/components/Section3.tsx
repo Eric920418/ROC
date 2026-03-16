@@ -166,11 +166,11 @@ export function Section3() {
                   </span>
                 </div>
 
-                <h1 className="text-xl lg:text-2xl font-black leading-tight tracking-tight text-white">
+                <h1 className="text-xl md:text-2xl font-black leading-tight tracking-tight text-white">
                   {currentProject.title}
                 </h1>
 
-                <h2 className="text-sm font-medium text-white/90">
+                <h2 className="text-sm md:text-base font-medium text-white/90">
                   {currentProject.subtitle}
                 </h2>
 

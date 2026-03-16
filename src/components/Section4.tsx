@@ -111,7 +111,7 @@ export function Section4() {
               </h2>
 
               {/* 描述 */}
-              <p className="text-sm leading-relaxed text-neutral-300 text-justify text-balance text-wrap">
+              <p className="text-sm md:text-base leading-relaxed text-neutral-300 text-justify text-balance text-wrap">
                 {currentTestimonial.description.length > 150
                   ? currentTestimonial.description.slice(0, 150) + "..."
                   : currentTestimonial.description}

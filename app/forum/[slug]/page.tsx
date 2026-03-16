@@ -132,7 +132,7 @@ export default async function PostPage({
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl md:text-3xl font-bold mb-4 text-neutral-900 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 text-neutral-900 leading-tight">
             {post.title}
           </h1>
 
