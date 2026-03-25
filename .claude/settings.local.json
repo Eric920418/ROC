@@ -8,7 +8,9 @@
       "Bash(pnpm build:*)",
       "Bash(grep:*)",
       "Bash(git -C /var/www/ROC log:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm dev:*)"
     ],
     "defaultMode": "acceptEdits"
   }

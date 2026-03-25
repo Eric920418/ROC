@@ -16,6 +16,8 @@ import { Section7Edit } from "@/components/Edit/Section7Edit";
 import { AboutEdit } from "@/components/Edit/AboutEdit";
 import { ContactEdit } from "@/components/Edit/ContactEdit";
 import { ContactMessages } from "@/components/Edit/ContactMessages";
+import { VideoHeroEdit } from "@/components/Edit/VideoHeroEdit";
+import { MasonryEdit } from "@/components/Edit/MasonryEdit";
 import { useEffect } from "react";
 
 export default function AdminPage() {
@@ -26,11 +28,13 @@ export default function AdminPage() {
 
   const EditPages = [
     // 首頁區塊
+    { slug: "video-hero", component: <VideoHeroEdit /> },
     { slug: "section1", component: <Section1Edit /> },
     { slug: "marquee", component: <MarqueeEdit /> },
     { slug: "section7", component: <Section7Edit /> },
     { slug: "section2", component: <Section2Edit /> },
     { slug: "section3", component: <Section3Edit /> },
+    { slug: "masonry", component: <MasonryEdit /> },
     { slug: "section4", component: <Section4Edit /> },
     { slug: "section6", component: <Section6Edit /> },
     // 其他頁面

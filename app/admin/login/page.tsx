@@ -27,7 +27,7 @@ export default function LoginPage() {
   // 已登入用戶自動重定向到管理後台
   useEffect(() => {
     if (status === "authenticated" && session) {
-      router.replace("/admin/section1");
+      router.replace("/admin/video-hero");
     }
   }, [status, session, router]);
 
@@ -115,7 +115,7 @@ export default function LoginPage() {
       } else {
         // 登入成功，重置 IP 記錄
         await resetIpRecord();
-        router.push("/admin/section1");
+        router.push("/admin/video-hero");
         router.refresh();
       }
     } finally {

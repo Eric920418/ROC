@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Section2 } from "@/components/Section2";
+import { Section6 } from "@/components/Section6";
+import { Section7 } from "@/components/Section7";
 import { useState, useEffect } from "react";
 
 interface GalleryImage {
@@ -241,6 +244,13 @@ export default function AboutPage() {
           </section>
         </main>
       </div>
+
+      <Section2 />
+
+      <Section6 />
+
+      {/* Section7 已有內建動畫（左右滑入），不需要外層包裹 */}
+      <Section7 />
 
       {/* Custom styles */}
       <style jsx>{`

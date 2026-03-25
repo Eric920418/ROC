@@ -11,12 +11,11 @@ export const Sidebar = () => {
   const [pagesOpen, setPagesOpen] = useState(true);
 
   const sectionLinks = [
-    { href: "/admin/section1", label: "主視覺區" },
-    { href: "/admin/marquee", label: "品牌輪播" },
+    { href: "/admin/video-hero", label: "影片主視覺" },
     { href: "/admin/section7", label: "立足台灣" },
     { href: "/admin/section2", label: "團隊成員" },
     { href: "/admin/section3", label: "空間探索" },
-    { href: "/admin/section4", label: "客戶見證" },
+    { href: "/admin/masonry", label: "瀑布流圖片牆" },
     { href: "/admin/section6", label: "FAQ 問答" },
   ];
 

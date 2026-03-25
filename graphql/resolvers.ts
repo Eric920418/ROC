@@ -420,6 +420,8 @@ const Query = {
   section3: createSingleQueryResolver("section3"),
   section4: createSingleQueryResolver("section4"),
   section6: createSingleQueryResolver("section6"),
+  videoHero: createSingleQueryResolver("videoHero"),
+  masonry: createSingleQueryResolver("masonry"),
   // 其他頁面
   about: createSingleQueryResolver("about"),
   contact: createSingleQueryResolver("contact"),
@@ -443,6 +445,8 @@ const Mutation = {
   updateSection3: createMutationResolver("section3"),
   updateSection4: createMutationResolver("section4"),
   updateSection6: createMutationResolver("section6"),
+  updateVideoHero: createMutationResolver("videoHero"),
+  updateMasonry: createMutationResolver("masonry"),
   // 其他頁面
   updateAbout: createMutationResolver("about"),
   updateContact: createMutationResolver("contact"),

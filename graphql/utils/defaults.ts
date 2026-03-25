@@ -119,6 +119,36 @@ const section6Defaults = {
   ],
 };
 
+// VideoHero - 影片主視覺
+const videoHeroDefaults = {
+  videoUrl: "/videos/hero.mp4",
+  posterImage: "",
+};
+
+// MasonryGallery - 瀑布流圖片牆
+const masonryDefaults = {
+  sectionTitle: "Selected Projects",
+  sectionSubtitle: "Our Works",
+  items: [
+    { id: "1", img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80", url: "#", title: "", height: 700, order: 1 },
+    { id: "2", img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80", url: "#", title: "", height: 500, order: 2 },
+    { id: "3", img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80", url: "#", title: "", height: 600, order: 3 },
+    { id: "4", img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80", url: "#", title: "", height: 450, order: 4 },
+    { id: "5", img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", url: "#", title: "", height: 550, order: 5 },
+    { id: "6", img: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&q=80", url: "#", title: "", height: 650, order: 6 },
+    { id: "7", img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80", url: "#", title: "", height: 480, order: 7 },
+    { id: "8", img: "https://images.unsplash.com/photo-1600566753086-00f18f6b6637?w=600&q=80", url: "#", title: "", height: 580, order: 8 },
+    { id: "9", img: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600&q=80", url: "#", title: "", height: 520, order: 9 },
+    { id: "10", img: "https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=600&q=80", url: "#", title: "", height: 400, order: 10 },
+    { id: "11", img: "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600&q=80", url: "#", title: "", height: 620, order: 11 },
+    { id: "12", img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=80", url: "#", title: "", height: 470, order: 12 },
+    { id: "13", img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80", url: "#", title: "", height: 540, order: 13 },
+    { id: "14", img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80", url: "#", title: "", height: 380, order: 14 },
+    { id: "15", img: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=600&q=80", url: "#", title: "", height: 600, order: 15 },
+    { id: "16", img: "https://images.unsplash.com/photo-1616137466211-f736a1dc5182?w=600&q=80", url: "#", title: "", height: 500, order: 16 },
+  ],
+};
+
 const logoDefaults = {
   main: "",
   favicon: "",
@@ -187,6 +217,8 @@ export const blockDefaults = {
   section3: () => clone(section3Defaults),
   section4: () => clone(section4Defaults),
   section6: () => clone(section6Defaults),
+  videoHero: () => clone(videoHeroDefaults),
+  masonry: () => clone(masonryDefaults),
   logo: () => clone(logoDefaults),
   color: () => clone(colorDefaults),
   about: () => clone(aboutDefaults),

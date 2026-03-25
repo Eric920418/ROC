@@ -37,7 +37,7 @@
 | 資料庫 | PostgreSQL |
 | 認證 | NextAuth.js |
 | 編輯器 | CKEditor 5 |
-| 動畫 | Framer Motion、CSS Animations |
+| 動畫 | Framer Motion、GSAP、CSS Animations |
 | 套件管理 | pnpm |
 
 ## 快速開始
@@ -106,13 +106,15 @@ pnpm dev
 
 | 區塊 | 功能 | 特色 |
 |------|------|------|
-| Section1 | 當代設計展示 | 品牌理念、設計哲學介紹 |
-| Marquee | 品牌輪播 | Logo + 後綴圖片組合輪播 |
+| VideoHero | 全屏影片主視覺 | 自動播放背景影片、極簡無文字覆蓋 |
+| Section1 | 當代設計展示 | 品牌理念、設計哲學介紹（已註釋） |
+| Marquee | 品牌輪播 | Logo + 後綴圖片組合輪播（已註釋） |
+| Section3 | 設計案例 | 全屏沉浸式、毛玻璃 UI |
+| MasonryGallery | 瀑布流圖片牆 | GSAP 動畫、blur-to-focus 入場、hover 縮放 |
 | Section7 | 服務地點 | 台北/台中/海外據點展示 |
 | Section2 | 團隊成員 | 3D 層疊卡片、自動輪播 |
-| Section3 | 設計案例 | 全屏沉浸式、毛玻璃 UI |
-| Section4 | 客戶見證 | 左圖右文、導航點切換 |
-| Section5 | 服務項目 | 網格布局、hover 動畫 |
+| Section4 | 客戶見證 | 左圖右文、導航點切換（已註釋） |
+| Section5 | 服務項目 | 網格布局、hover 動畫（已註釋） |
 | Section6 | FAQ 問答 | 手風琴式展開 |
 
 ## 論壇頁面設計
@@ -177,12 +179,11 @@ import { AnimatedSection, HeroAnimation } from "@/components/AnimatedSection";
 ## 後台管理功能
 
 ### 首頁區塊管理
-- `/admin/section1` - 主視覺區編輯
-- `/admin/marquee` - 品牌輪播編輯
+- `/admin/video-hero` - 影片主視覺編輯（影片 URL、Poster 靜態圖）
 - `/admin/section7` - 服務地點編輯
 - `/admin/section2` - 團隊成員編輯
 - `/admin/section3` - 設計案例編輯
-- `/admin/section4` - 客戶見證編輯
+- `/admin/masonry` - 瀑布流圖片牆編輯（圖片、標題、連結、高度、排序）
 - `/admin/section6` - FAQ 問答編輯
 
 ### 其他頁面管理

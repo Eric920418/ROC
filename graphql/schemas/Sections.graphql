@@ -112,6 +112,32 @@ input UpdateSection6Input {
   faqs: JSON
 }
 
+# VideoHero - 影片主視覺
+type VideoHero {
+  id: ID!
+  videoUrl: String
+  posterImage: String
+}
+
+input UpdateVideoHeroInput {
+  videoUrl: String
+  posterImage: String
+}
+
+# MasonryGallery - 瀑布流圖片牆
+type MasonryGallery {
+  id: ID!
+  sectionTitle: String
+  sectionSubtitle: String
+  items: JSON
+}
+
+input UpdateMasonryGalleryInput {
+  sectionTitle: String
+  sectionSubtitle: String
+  items: JSON
+}
+
 # About 頁面
 type About {
   id: ID!
@@ -204,6 +230,8 @@ extend type Query {
   section3: Section3
   section4: Section4
   section6: Section6
+  videoHero: VideoHero
+  masonry: MasonryGallery
   about: About
   contact: Contact
   contactMessages: [ContactMessage!]!
@@ -219,6 +247,8 @@ extend type Mutation {
   updateSection3(input: UpdateSection3Input!): Section3
   updateSection4(input: UpdateSection4Input!): Section4
   updateSection6(input: UpdateSection6Input!): Section6
+  updateVideoHero(input: UpdateVideoHeroInput!): VideoHero
+  updateMasonry(input: UpdateMasonryGalleryInput!): MasonryGallery
   updateAbout(input: UpdateAboutInput!): About
   updateContact(input: UpdateContactInput!): Contact
   submitContactMessage(input: SubmitContactMessageInput!): ContactMessage
