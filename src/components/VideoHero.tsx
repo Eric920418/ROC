@@ -41,8 +41,24 @@ export function VideoHero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
+      {/* 影片未載入時：優先顯示 Poster，否則顯示深色 fallback */}
+      {!videoLoaded && (
+        data.posterImage ? (
+          // 使用 <img> 而非 next/image，避免遠端網域白名單問題
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={data.posterImage}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-neutral-900" />
+        )
+      )}
+
       {/* 背景影片 */}
       <video
+        key={data.videoUrl}
         autoPlay
         muted
         loop
@@ -55,11 +71,6 @@ export function VideoHero() {
       >
         <source src={data.videoUrl} type="video/mp4" />
       </video>
-
-      {/* 影片未載入時的 fallback 背景 */}
-      {!videoLoaded && (
-        <div className="absolute inset-0 bg-neutral-900" />
-      )}
 
       {/* 輕微遮罩 */}
       <div className="absolute inset-0 bg-black/10" />

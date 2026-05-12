@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { ImageUploader } from "@/components/Admin/ImageUploader";
+import { VideoUploader } from "@/components/Admin/VideoUploader";
 import { graphqlRequest } from "@/utils/graphqlClient";
 
 interface VideoHeroData {
@@ -95,38 +96,30 @@ export function VideoHeroEdit() {
 
       <h1 className="text-2xl font-bold">影片主視覺編輯</h1>
 
-      {/* 影片 URL */}
+      {/* 影片上傳 */}
       <div className="bg-gray-100 p-4 rounded-lg space-y-4">
         <h2 className="font-semibold text-lg">背景影片</h2>
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            影片路徑 / URL
-          </label>
-          <input
-            type="text"
-            value={data.videoUrl}
-            onChange={(e) => setData((prev) => ({ ...prev, videoUrl: e.target.value }))}
-            className="w-full px-3 py-2 border rounded-md"
-            placeholder="/videos/hero.mp4 或 https://..."
-          />
-          <p className="text-xs text-gray-500 mt-1">
-            將 MP4 檔案放入 public/videos/ 目錄，填入相對路徑如 /videos/hero.mp4；或填入外部影片 URL
-          </p>
-        </div>
         {data.videoUrl && (
           <div className="mt-2">
-            <p className="text-sm text-gray-600 mb-1">影片預覽：</p>
+            <p className="text-sm text-gray-600 mb-1">目前影片預覽：</p>
             <video
+              key={data.videoUrl}
               src={data.videoUrl}
               controls
               muted
               className="w-full max-w-lg rounded-md border"
               style={{ maxHeight: "300px" }}
-            >
-              <source src={data.videoUrl} type="video/mp4" />
-            </video>
+            />
+            <p className="text-xs text-gray-500 mt-1 break-all">
+              路徑：{data.videoUrl}
+            </p>
           </div>
         )}
+        <VideoUploader
+          onVideoUpload={(res) =>
+            setData((prev) => ({ ...prev, videoUrl: res.videoUrl }))
+          }
+        />
       </div>
 
       {/* Poster 圖片 */}
